@@ -1,10 +1,11 @@
 package com.worksnet.utils;
 
-import java.io.Serializable;
-
+import com.worksnet.system.Conf;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.classic.Session;
+
+import java.io.Serializable;
 
 /**
  * @author maxim.levicky
@@ -13,10 +14,12 @@ import org.hibernate.classic.Session;
  */
 public class DB {
     private static final SessionFactory factory = buildSessionFactory();
+    private static final Session session = createSession();
 
     private static SessionFactory buildSessionFactory() {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
+            System.out.print(Conf.get("webinfPath"));
             return new AnnotationConfiguration()
                     .configure()
                     .buildSessionFactory();
@@ -26,12 +29,16 @@ public class DB {
         }
     }
 
+    private static Session createSession() {
+        return getSessionFactory().openSession();
+    }
+
     private static SessionFactory getSessionFactory() {
         return factory;
     }
 
     private static Session getSession() {
-        return factory.getCurrentSession();
+        return session;
     }
 
     public static void save(Object object) {
@@ -51,6 +58,6 @@ public class DB {
     }
 
     public static <T> T find(String query) {
-        return (T) getSession().find(query);
+        return (T) getSession().createQuery(query).iterate().next();
     }
 }
