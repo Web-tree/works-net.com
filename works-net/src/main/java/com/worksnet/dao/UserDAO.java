@@ -1,6 +1,8 @@
-package com.worksnet.DAO;
+package com.worksnet.dao;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.worksnet.model.User;
 import com.worksnet.utils.DB;
@@ -11,23 +13,30 @@ import com.worksnet.utils.DB;
  *         Time: 3:01 PM
  */
 public class UserDAO implements DAO {
+    @Autowired
+    private DB db;
+
+    public void setDb(DB db) {
+        this.db = db;
+    }
+
     public void add(User user) {
-        DB.save(user);
+        db.save(user);
     }
 
     public void update(User user) {
-        DB.saveOrUpdate(user);
+        db.saveOrUpdate(user);
     }
 
     public void delete(User user) {
-        DB.delete(user);
+        db.delete(user);
     }
 
     public User getById(Long id) {
-        return DB.get(User.class, id);
+        return db.get(User.class, id);
     }
 
     public List<User> getAll() {
-        return DB.find("from user");
+        return (List<User>) db.find("from User");
     }
 }

@@ -1,4 +1,4 @@
-package com.worksnet.DAO;
+package com.worksnet.dao;
 
 import java.util.List;
 

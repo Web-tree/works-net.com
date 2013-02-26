@@ -1,7 +1,8 @@
 package com.worksnet.model;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.*;
 
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  *         Time: 2:44 PM
  */
 @Entity
-@Table(name = "user", schema = "user")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

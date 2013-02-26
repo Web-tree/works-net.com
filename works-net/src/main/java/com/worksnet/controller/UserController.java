@@ -51,7 +51,6 @@ public class UserController {
     @RequestMapping(value = "/user/{id}/{action}", method = RequestMethod.GET)
     public String edit(@PathVariable String id, @PathVariable String action, Model model) {
         User user = service.getById(Long.parseLong(id));
-
         if (action.equals("delete")) {
             service.delete(user);
             return "redirect:/user";

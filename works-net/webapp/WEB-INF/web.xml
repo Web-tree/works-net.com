@@ -9,8 +9,10 @@
         <param-value>
             /WEB-INF/applicationContext.xml
             /WEB-INF/databaseConfig.xml
-            /WEB-INF/dispatcher-servlet.xml
+            /WEB-INF/servlet-context.xml
+            /WEB-INF/security.xml
         </param-value>
+
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

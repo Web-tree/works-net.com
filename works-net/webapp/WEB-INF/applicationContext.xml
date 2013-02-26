@@ -11,13 +11,15 @@
     <context:annotation-config/>
 
     <!--<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>-->
+    <bean name="DB" class="com.worksnet.utils.DB"/>
+    <bean name="userDAO" class="com.worksnet.dao.UserDAO"/>
 
-    <bean name="userDAO" class="com.worksnet.DAO.UserDAO">
-    </bean>
+    <context:component-scan base-package="com.worksnet.dao"/>
+    <context:component-scan base-package="com.worksnet.service"/>
 
-    <bean name="userService" class="com.worksnet.service.UserService">
-        <property name="userDAO" ref="userDAO"/>
-    </bean>
+    <bean name="userValidator" class="com.worksnet.validator.UserValidator"/>
+
+    <!--<bean name="userService" class="com.worksnet.service.UserService" />-->
 
 
 </beans>
