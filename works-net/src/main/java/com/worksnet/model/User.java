@@ -1,7 +1,8 @@
 package com.worksnet.model;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.*;
 
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)

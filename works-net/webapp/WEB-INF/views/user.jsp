@@ -16,7 +16,7 @@
     </c:forEach>
 </table>
 
-<form:form modelAttribute="user">
+<form:form action="/user" modelAttribute="user">
     <form:hidden path="id"/>
     <table>
         <tr>

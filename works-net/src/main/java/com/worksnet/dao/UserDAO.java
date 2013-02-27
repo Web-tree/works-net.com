@@ -12,31 +12,33 @@ import com.worksnet.utils.DB;
  *         Date: 2/20/13
  *         Time: 3:01 PM
  */
-public class UserDAO implements DAO {
+public class UserDAO<T extends User> implements DAO<User> {
     @Autowired
     private DB db;
 
-    public void setDb(DB db) {
-        this.db = db;
-    }
-
+    @Override
     public void add(User user) {
         db.save(user);
     }
 
+    @Override
     public void update(User user) {
         db.saveOrUpdate(user);
     }
 
+    @Override
     public void delete(User user) {
         db.delete(user);
     }
 
-    public User getById(Long id) {
+    @Override
+    @SuppressWarnings("unchecked")
+    public User getById(int id) {
         return db.get(User.class, id);
     }
 
+    @Override
     public List<User> getAll() {
-        return (List<User>) db.find("from User");
+        return db.find("from User");
     }
 }

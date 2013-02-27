@@ -1,13 +1,14 @@
 package com.worksnet.utils;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.annotation.PostConstruct;
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -51,7 +52,7 @@ public class DB {
     }
 
     public void saveOrUpdate(Object object) {
-        getSession().saveOrUpdate(object);
+        getSession().merge(object);
     }
 
     public void delete(Object object) {
@@ -63,8 +64,8 @@ public class DB {
         return (T) getSession().get(clazz, id);
     }
 
-    public List find(String query) {
-        List list = getSession().createQuery(query).list();
-        return list;
+    @SuppressWarnings("unchecked")
+    public <T> List<T> find(String query) {
+        return (List<T>) getSession().createQuery(query).list();
     }
 }
