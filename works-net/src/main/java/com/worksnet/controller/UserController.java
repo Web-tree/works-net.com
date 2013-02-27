@@ -1,8 +1,8 @@
 package com.worksnet.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.worksnet.model.User;
+import com.worksnet.service.UserService;
+import com.worksnet.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -10,10 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.worksnet.model.User;
-import com.worksnet.service.UserService;
-import com.worksnet.validator.UserValidator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author maxim.levicky
@@ -35,14 +35,19 @@ public class UserController {
 
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public void get(Model model) {
-        model.addAttribute("people", service.getList());
+    public ModelAndView get() {
+        return new ModelAndView()
+                .addObject("users", service.getList())
+                .addObject("user", new User())
+                ;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
     public String add(@ModelAttribute("user") User user, BindingResult result) {
         userValidator.validate(user, result);
-        if (result.hasErrors()) { return "/users"; }
+        if (result.hasErrors()) {
+            return "/users";
+        }
         service.update(user);
         return "redirect:/user";
     }
@@ -56,7 +61,9 @@ public class UserController {
             return "redirect:/user";
         }
 
-        if (action.equals("edit")) { model.addAttribute("user", user); }
+        if (action.equals("edit")) {
+            model.addAttribute("user", user);
+        }
         return "/users";
 
 
