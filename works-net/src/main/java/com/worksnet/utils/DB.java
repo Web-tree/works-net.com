@@ -1,14 +1,13 @@
 package com.worksnet.utils;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -65,6 +64,7 @@ public class DB {
     }
 
     public List find(String query) {
-        return getSession().createQuery(query).list();
+        List list = getSession().createQuery(query).list();
+        return list;
     }
 }
