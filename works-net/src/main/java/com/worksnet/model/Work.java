@@ -18,6 +18,4 @@ public class Work {
     int type;
     @Column(name = "name", nullable = false)
     String name;
-
-
 }
