@@ -1,8 +1,7 @@
 package com.worksnet.model;
 
-import java.util.Date;
-
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -15,8 +14,8 @@ import javax.persistence.*;
 public class User extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
-    private Long id;
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
+    private int id;
 
     @Column(name = "name", nullable = false, unique = true, length = 128)
     private String name;
@@ -27,11 +26,11 @@ public class User extends BaseModel {
     @Column(name = "birth", nullable = false)
     private Date birth;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

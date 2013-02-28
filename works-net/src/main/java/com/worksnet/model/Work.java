@@ -1,7 +1,6 @@
 package com.worksnet.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author maxim.levicky
@@ -11,5 +10,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "work")
 public class Work {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    int id;
+    @Column(name = "type", nullable = false)
+    int type;
+    @Column(name = "name", nullable = false)
+    String name;
+
 
 }
