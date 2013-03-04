@@ -8,8 +8,8 @@ import javax.persistence.*;
  *         Time: 3:04 PM
  */
 @Entity
-@Table(name = "work")
-public class Work {
+@Table(name = "works")
+public class Work implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -18,4 +18,28 @@ public class Work {
     int type;
     @Column(name = "name", nullable = false)
     String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

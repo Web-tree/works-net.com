@@ -12,60 +12,53 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.worksnet.model.User;
-import com.worksnet.service.UserService;
-import com.worksnet.validator.UserValidator;
+import com.worksnet.model.Work;
+import com.worksnet.service.WorkService;
+import com.worksnet.validator.WorkValidator;
 
 /**
  * @author maxim.levicky
- *         Date: 2/20/13
- *         Time: 3:12 PM
+ *         Date: 3/1/13
+ *         Time: 12:05 PM
  */
 @Controller
-public class UserController extends BaseController {
+public class WorkController extends BaseController {
     @Autowired
-    protected UserService service;
+    private WorkService service;
 
     @Autowired
-    private UserValidator userValidator;
+    private WorkValidator workValidator;
 
-    @RequestMapping("/")
-    public String foo() {
-        return "redirect:user";
-    }
-
-
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/work", method = RequestMethod.GET)
     public ModelAndView get() {
         return new ModelAndView()
-                .addObject("templateName", "user")
-                .addObject("users", service.getList())
-                .addObject("user", new User());
+                .addObject("works", service.getList())
+                .addObject("work", new Work());
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public String add(@ModelAttribute("user") User user, BindingResult result) {
-        userValidator.validate(user, result);
+    @RequestMapping(value = "/work", method = RequestMethod.POST)
+    public String add(@ModelAttribute("work") Work work, BindingResult result) {
+        workValidator.validate(work, result);
         if (result.hasErrors()) {
-            return "/index";
+            return "/work";
         }
-        service.update(user);
-        return "redirect:/user";
+        service.update(work);
+        return "redirect:/work";
     }
 
 
-    @RequestMapping(value = "/user/{id}/{action}")
+    @RequestMapping(value = "/work/{id}/{action}")
     public String edit(@PathVariable String id, @PathVariable String action, Model model) {
-        User user = service.getById(Integer.parseInt(id));
+        Work work = service.getById(Integer.parseInt(id));
         if (action.equals("delete")) {
-            service.delete(user);
-            return "redirect:/user";
+            service.delete(work);
+            return "redirect:/work";
         }
 
         if (action.equals("edit")) {
-            model.addAttribute("user", user);
+            model.addAttribute("work", work);
         }
-        return "/index";
+        return "/work";
     }
 
 

@@ -5,13 +5,14 @@
 
 
 <table>
-    <c:forEach items="${users}" var="u">
+    <%--@elvariable id="users" type="java.util.List<User>"--%>
+    <c:forEach items="${users}" var="user">
         <tr>
-            <td><c:out value="${u.name}"/></td>
-            <td><c:out value="${u.email}"/></td>
-            <td><c:out value="${u.birth}"/></td>
-            <td><a href='<c:url value="user/${u.id}/edit"/>'>Edit</a></td>
-            <td><a href='<c:url value="user/${u.id}/delete"/>'>Delete</a></td>
+            <td><c:out value="${user.name}"/></td>
+            <td><c:out value="${user.email}"/></td>
+            <td><c:out value="${user.birth}"/></td>
+            <td><a href='<c:url value="user/${user.id}/edit"/>'>Edit</a></td>
+            <td><a href='<c:url value="user/${user.id}/delete"/>'>Delete</a></td>
         </tr>
     </c:forEach>
 </table>

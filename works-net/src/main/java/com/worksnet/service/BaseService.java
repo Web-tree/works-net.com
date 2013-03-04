@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.worksnet.dao.DAO;
+import com.worksnet.dao.BaseDAO;
 import com.worksnet.model.Model;
 
 /**
@@ -15,7 +15,7 @@ import com.worksnet.model.Model;
  */
 abstract public class BaseService<T extends Model> {
     @Autowired
-    private DAO<T> dao;
+    private BaseDAO<T> dao;
 
     @Transactional
     public void add(T model) {

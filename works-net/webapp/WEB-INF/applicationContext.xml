@@ -18,6 +18,7 @@
     <context:component-scan base-package="com.worksnet.service"/>
 
     <bean name="userValidator" class="com.worksnet.validator.UserValidator"/>
+    <bean name="workValidator" class="com.worksnet.validator.WorkValidator"/>
 
 
 </beans>
