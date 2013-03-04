@@ -1,46 +1,42 @@
 package com.worksnet.dao;
 
-import java.util.List;
-
+import com.worksnet.model.Model;
+import com.worksnet.utils.DB;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.worksnet.model.Model;
-import com.worksnet.model.User;
-import com.worksnet.utils.DB;
+import java.util.List;
 
 /**
  * @author maxim.levicky
  *         Date: 2/28/13
  *         Time: 5:12 PM
  */
-abstract public class BaseDAO<T extends Model> implements DAO<Model> {
+abstract public class BaseDAO<T extends Model> implements DAO<T> {
     @Autowired
     private DB db;
 
-    @Override
-    public void add(Model model) {
+    public void add(T model) {
         db.save(model);
     }
 
-    @Override
-    public void update(Model model) {
+    public void update(T model) {
         db.saveOrUpdate(model);
     }
 
-    @Override
-    public void delete(Model model) {
+    public void delete(T model) {
         db.delete(model);
     }
 
-    @Override
     @SuppressWarnings("unchecked")
-    public User getById(int id) {
-        return db.get(User.class, id);
+    public T getById(int id) {
+        return db.get(getClassType(), id);
     }
 
-    public List<Model> getAll() {
+    public List<T> getAll() {
         return db.find(getAllQuery());
     }
+
+    abstract protected Class<T> getClassType();
 
     abstract protected String getAllQuery();
 

@@ -5,31 +5,22 @@
 
 
 <table>
-    <c:forEach items="${users}" var="work">
+    <%--@elvariable id="works" type="java.util.List<Work>"--%>
+    <c:forEach items="${works}" var="work">
         <tr>
             <td><c:out value="${work.name}"/></td>
-            <td><c:out value="${work.email}"/></td>
-            <td><c:out value="${work.birth}"/></td>
             <td><a href='<c:url value="user/${work.id}/edit"/>'>Edit</a></td>
             <td><a href='<c:url value="user/${work.id}/delete"/>'>Delete</a></td>
         </tr>
     </c:forEach>
 </table>
 
-<form:form action="/user" modelAttribute="user">
+<form:form action="/work" modelAttribute="work">
     <form:hidden path="id"/>
     <table>
         <tr>
             <td>Name</td>
             <td><form:input path="name"/><form:errors path="name"/></td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><form:input path="email"/><form:errors path="email"/></td>
-        </tr>
-        <tr>
-            <td>Birth</td>
-            <td><form:input path="birth"/><form:errors path="birth"/></td>
         </tr>
         <tr>
             <td></td>
