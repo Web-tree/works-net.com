@@ -1,12 +1,11 @@
 package com.worksnet.service;
 
-import java.util.List;
-
+import com.worksnet.dao.BaseDAO;
+import com.worksnet.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.worksnet.dao.BaseDAO;
-import com.worksnet.model.Model;
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -14,8 +13,12 @@ import com.worksnet.model.Model;
  *         Time: 12:47 PM
  */
 abstract public class BaseService<T extends Model> {
+    protected BaseDAO<T> dao;
+
     @Autowired
-    private BaseDAO<T> dao;
+    public void setDao(BaseDAO<T> dao) {
+        this.dao = dao;
+    }
 
     @Transactional
     public void add(T model) {

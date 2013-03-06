@@ -8,6 +8,12 @@ import com.worksnet.model.User;
  *         Time: 3:01 PM
  */
 public class UserDAO extends BaseDAO<User> {
+
+    @Override
+    protected Class<User> getClassType() {
+        return User.class;
+    }
+
     @Override
     protected String getAllQuery() {
         return "from User";

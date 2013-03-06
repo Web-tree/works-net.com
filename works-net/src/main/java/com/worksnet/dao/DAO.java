@@ -3,9 +3,9 @@ package com.worksnet.dao;
 import java.util.List;
 
 /**
- * @author maxim.levicky
- *         Date: 3/1/13
- *         Time: 1:41 PM
+ * @author Max Levicky
+ *         Date: 02.03.13
+ *         Time: 10:03
  */
 public interface DAO<T> {
     public void add(T model);
@@ -14,6 +14,7 @@ public interface DAO<T> {
 
     public void delete(T model);
 
+    @SuppressWarnings("unchecked")
     public T getById(int id);
 
     public List<T> getAll();

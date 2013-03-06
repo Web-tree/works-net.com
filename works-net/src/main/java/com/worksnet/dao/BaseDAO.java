@@ -1,11 +1,10 @@
 package com.worksnet.dao;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.worksnet.model.Model;
 import com.worksnet.utils.DB;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -36,6 +35,8 @@ abstract public class BaseDAO<T extends Model> implements DAO<T> {
     public List<T> getAll() {
         return db.find(getAllQuery());
     }
+
+    abstract protected Class<T> getClassType();
 
     abstract protected String getAllQuery();
 

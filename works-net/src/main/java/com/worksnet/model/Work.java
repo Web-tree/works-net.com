@@ -8,8 +8,8 @@ import javax.persistence.*;
  *         Time: 3:04 PM
  */
 @Entity
-@Table(name = "works")
-public class Work implements Model {
+@Table(name = "work")
+public class Work extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

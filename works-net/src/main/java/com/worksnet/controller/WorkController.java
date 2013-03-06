@@ -1,8 +1,8 @@
 package com.worksnet.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.worksnet.model.Work;
+import com.worksnet.service.WorkService;
+import com.worksnet.validator.WorkValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -12,19 +12,18 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.worksnet.model.Work;
-import com.worksnet.service.WorkService;
-import com.worksnet.validator.WorkValidator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author maxim.levicky
- *         Date: 3/1/13
- *         Time: 12:05 PM
+ *         Date: 2/20/13
+ *         Time: 3:12 PM
  */
 @Controller
 public class WorkController extends BaseController {
     @Autowired
-    private WorkService service;
+    protected WorkService service;
 
     @Autowired
     private WorkValidator workValidator;
@@ -60,7 +59,6 @@ public class WorkController extends BaseController {
         }
         return "/work";
     }
-
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

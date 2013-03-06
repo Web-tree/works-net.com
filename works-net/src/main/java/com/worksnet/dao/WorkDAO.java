@@ -4,18 +4,18 @@ import com.worksnet.model.Work;
 
 /**
  * @author maxim.levicky
- *         Date: 3/1/13
- *         Time: 12:01 PM
+ *         Date: 2/20/13
+ *         Time: 3:01 PM
  */
 public class WorkDAO extends BaseDAO<Work> {
 
     @Override
-    protected String getAllQuery() {
-        return "from works";
+    protected Class<Work> getClassType() {
+        return Work.class;
     }
 
     @Override
-    protected Class<Work> getClassType() {
-        return Work.class;
+    protected String getAllQuery() {
+        return "from Work";
     }
 }
