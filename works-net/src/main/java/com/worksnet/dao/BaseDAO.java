@@ -4,6 +4,7 @@ import com.worksnet.model.Model;
 import com.worksnet.utils.DB;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,12 +34,16 @@ abstract public class BaseDAO<T extends Model> implements DAO<T> {
     }
 
     public List<T> getAll() {
-        return db.find(getAllQuery());
+        List<T> list = db.find(getAllQuery());
+        return (list == null) ? getEmptyList() : list;
+    }
+
+    protected List<T> getEmptyList() {
+        return new ArrayList<T>();
     }
 
     abstract protected Class<T> getClassType();
 
     abstract protected String getAllQuery();
 
-    abstract protected Class<T> getClassType();
 }

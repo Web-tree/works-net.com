@@ -107,28 +107,11 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.5.8</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.3.1.ga</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-project</artifactId>
-            <version>9.0.0.RC1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>9.0.0.M5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <version>9.0.0.M5</version>
-        </dependency>
-
+        <!--<dependency>-->
+        <!--<groupId>org.hibernate</groupId>-->
+        <!--<artifactId>hibernate-entitymanager</artifactId>-->
+        <!--<version>3.3.1.ga</version>-->
+        <!--</dependency>-->
 
     </dependencies>
     <repositories>

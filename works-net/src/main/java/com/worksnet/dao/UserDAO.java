@@ -18,9 +18,4 @@ public class UserDAO extends BaseDAO<User> {
     protected String getAllQuery() {
         return "from User";
     }
-
-    @Override
-    protected Class<User> getClassType() {
-        return User.class;
-    }
 }

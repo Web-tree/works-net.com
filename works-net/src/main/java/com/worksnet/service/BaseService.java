@@ -1,8 +1,7 @@
 package com.worksnet.service;
 
-import com.worksnet.dao.BaseDAO;
+import com.worksnet.dao.DAO;
 import com.worksnet.model.Model;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -13,12 +12,7 @@ import java.util.List;
  *         Time: 12:47 PM
  */
 abstract public class BaseService<T extends Model> {
-    protected BaseDAO<T> dao;
-
-    @Autowired
-    public void setDao(BaseDAO<T> dao) {
-        this.dao = dao;
-    }
+    protected DAO<T> dao;
 
     @Transactional
     public void add(T model) {

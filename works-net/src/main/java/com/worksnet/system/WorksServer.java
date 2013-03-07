@@ -26,6 +26,7 @@ public class WorksServer {
         HandlerCollection handlers = new HandlerCollection();
         handlers.setHandlers(new Handler[]{context, new DefaultHandler()});
         server.setHandler(handlers);
+
         server.start();
         server.join();
     }
