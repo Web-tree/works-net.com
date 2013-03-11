@@ -17,14 +17,20 @@ public class User extends BaseModel {
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private int id;
 
-    @Column(name = "name", nullable = false, unique = true, length = 128)
+    @Column(name = "username", nullable = false, unique = true, length = 128)
     private String name;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "email", nullable = false, unique = true, length = 128)
     private String email;
 
     @Column(name = "birth", nullable = false)
     private Date birth;
+
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
 
     public int getId() {
         return id;
@@ -42,6 +48,14 @@ public class User extends BaseModel {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -56,5 +70,13 @@ public class User extends BaseModel {
 
     public void setBirth(Date birth) {
         this.birth = birth;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

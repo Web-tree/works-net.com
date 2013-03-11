@@ -1,8 +1,9 @@
 package com.worksnet.service;
 
-import org.springframework.stereotype.Service;
-
+import com.worksnet.dao.UserDAO;
 import com.worksnet.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author maxim.levicky
@@ -12,4 +13,8 @@ import com.worksnet.model.User;
 @Service
 public class UserService extends BaseService<User> {
 
+    @Autowired
+    public void setDao(UserDAO dao) {
+        this.dao = dao;
+    }
 }

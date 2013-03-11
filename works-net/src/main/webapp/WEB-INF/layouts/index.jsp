@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <title>${title}</title>
 </head>
 <body>
-<jsp:include page="../views/${fileName}.jsp"/>
+${body}
 </body>
 </html>

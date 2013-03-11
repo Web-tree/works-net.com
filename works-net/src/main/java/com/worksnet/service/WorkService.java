@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class WorkService extends BaseService<Work> {
-    protected WorkDAO dao;
-
     @Autowired
     public void setDao(WorkDAO dao) {
         this.dao = dao;

@@ -16,16 +16,7 @@
     <bean name="userDAO" class="com.worksnet.dao.UserDAO"/>
     <bean name="workDAO" class="com.worksnet.dao.WorkDAO"/>
 
-    <!--<context:component-scan base-package="com.worksnet.dao"/>-->
-    <!--<context:component-scan base-package="com.worksnet.service"/>-->
-
-    <bean name="userService" class="com.worksnet.service.UserService">
-        <property name="dao" ref="userDAO"/>
-    </bean>
-
-    <bean name="workService" class="com.worksnet.service.WorkService">
-        <property name="dao" ref="workDAO"/>
-    </bean>
+    <context:component-scan base-package="com.worksnet.service"/>
 
     <bean name="userValidator" class="com.worksnet.validator.UserValidator"/>
     <bean name="workValidator" class="com.worksnet.validator.WorkValidator"/>

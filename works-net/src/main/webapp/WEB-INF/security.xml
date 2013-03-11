@@ -4,7 +4,7 @@
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <http auto-config="true" access-denied-page="/error403.jsp">
         <intercept-url pattern="/user" method="GET" access="ROLE_USER,ROLE_ANONYMOUS"/>
-        <intercept-url pattern="/user" method="POST" access="ROLE_USER,ROLE_ADMIN"/>
+        <intercept-url pattern="/user" method="POST" access="ROLE_USER,ROLE_ADMIN,ROLE_ANONYMOUS"/>
         <intercept-url pattern="/user/*/edit" access="ROLE_USER"/>
         <intercept-url pattern="/user/*/delete" access="ROLE_ADMIN"/>
         <form-login login-page="/login.jsp" default-target-url="/"

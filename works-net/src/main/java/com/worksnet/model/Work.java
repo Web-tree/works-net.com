@@ -19,6 +19,7 @@ public class Work extends BaseModel {
     @Column(name = "name", nullable = false)
     String name;
 
+
     public int getId() {
         return id;
     }
