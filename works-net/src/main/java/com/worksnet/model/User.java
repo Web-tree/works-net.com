@@ -30,7 +30,7 @@ public class User extends BaseModel {
     private Date birth;
 
     @Column(name = "enabled", nullable = false)
-    private boolean enabled;
+    private boolean enabled = false;
 
     public int getId() {
         return id;
@@ -78,5 +78,17 @@ public class User extends BaseModel {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof User)) {
+            return false;
+        }
+        User user = (User) object;
+        return user.getId() == getId()
+                && user.getEmail().equals(getEmail())
+                && user.getName().equals(getName())
+                && user.getBirth().equals(getBirth());
     }
 }
