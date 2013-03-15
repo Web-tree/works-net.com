@@ -8,9 +8,9 @@ import java.util.List;
  *         Time: 10:03
  */
 public interface DAO<T> {
-    public void add(T model);
+    public int add(T model);
 
-    public void update(T model);
+    public int update(T model);
 
     public void delete(T model);
 

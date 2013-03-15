@@ -1,7 +1,8 @@
 package com.worksnet.validator;
 
-import com.worksnet.model.Work;
 import org.springframework.validation.BindingResult;
+
+import com.worksnet.model.Work;
 
 /**
  * @author maxim.levicky

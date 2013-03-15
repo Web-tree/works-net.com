@@ -1,19 +1,24 @@
 package com.worksnet.controller;
 
-import com.worksnet.model.Work;
-import com.worksnet.service.WorkService;
-import com.worksnet.validator.WorkValidator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.worksnet.model.Work;
+import com.worksnet.service.WorkService;
+import com.worksnet.validator.WorkValidator;
 
 /**
  * @author maxim.levicky
@@ -38,6 +43,7 @@ public class WorkController extends BaseController {
     @RequestMapping(value = "/work", method = RequestMethod.POST)
     public String add(@ModelAttribute("work") Work work, BindingResult result) {
         workValidator.validate(work, result);
+
         if (result.hasErrors()) {
             return "/work";
         }
@@ -49,13 +55,14 @@ public class WorkController extends BaseController {
     @RequestMapping(value = "/work/{id}/{action}")
     public String edit(@PathVariable String id, @PathVariable String action, Model model) {
         Work work = service.getById(Integer.parseInt(id));
-        if (action.equals("delete")) {
-            service.delete(work);
-            return "redirect:/work";
-        }
 
-        if (action.equals("edit")) {
-            model.addAttribute("work", work);
+        switch (action) {
+            case "edit":
+                model.addAttribute("work", work);
+            break;
+            case "delete":
+                service.delete(work);
+                return "redirect:/work";
         }
         return "/work";
     }

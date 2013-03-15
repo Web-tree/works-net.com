@@ -1,10 +1,11 @@
 package com.worksnet.service;
 
-import com.worksnet.dao.DAO;
-import com.worksnet.model.Model;
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.worksnet.dao.DAO;
+import com.worksnet.model.Model;
 
 /**
  * @author maxim.levicky
@@ -14,14 +15,18 @@ import java.util.List;
 abstract public class BaseService<T extends Model> {
     protected DAO<T> dao;
 
-    @Transactional
-    public void add(T model) {
-        dao.add(model);
+    public void setDao(DAO<T> dao) {
+        this.dao = dao;
     }
 
     @Transactional
-    public void update(T model) {
-        dao.update(model);
+    public int add(T model) {
+        return dao.add(model);
+    }
+
+    @Transactional
+    public int update(T model) {
+        return dao.update(model);
     }
 
     @Transactional

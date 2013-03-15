@@ -1,9 +1,10 @@
 package com.worksnet.service;
 
-import com.worksnet.dao.WorkDAO;
-import com.worksnet.model.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.worksnet.dao.WorkDAO;
+import com.worksnet.model.Work;
 
 /**
  * @author maxim.levicky

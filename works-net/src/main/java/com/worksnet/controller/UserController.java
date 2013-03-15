@@ -9,7 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.worksnet.model.User;
@@ -22,6 +26,7 @@ import com.worksnet.validator.UserValidator;
  *         Time: 3:12 PM
  */
 @Controller
+@RequestMapping("/user")
 public class UserController extends BaseController {
     @Autowired
     protected UserService service;
@@ -29,13 +34,7 @@ public class UserController extends BaseController {
     @Autowired
     private UserValidator userValidator;
 
-    @RequestMapping("/")
-    public String foo() {
-        return "redirect:user";
-    }
-
-
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView get() {
         return new ModelAndView()
                 .addObject("templateName", "user")
@@ -43,18 +42,18 @@ public class UserController extends BaseController {
                 .addObject("user", new User());
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public String add(@ModelAttribute("user") User user, BindingResult result) {
         userValidator.validate(user, result);
         if (result.hasErrors()) {
-            return "/index";
+            return "/user";
         }
         service.update(user);
         return "redirect:/user";
     }
 
 
-    @RequestMapping(value = "/user/{id}/{action}")
+    @RequestMapping(value = "/{id}/{action}")
     public String edit(@PathVariable String id, @PathVariable String action, Model model) {
         User user = service.getById(Integer.parseInt(id));
         if (action.equals("delete")) {
@@ -65,7 +64,7 @@ public class UserController extends BaseController {
         if (action.equals("edit")) {
             model.addAttribute("user", user);
         }
-        return "/index";
+        return "/user";
     }
 
 

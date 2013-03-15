@@ -1,6 +1,11 @@
 package com.worksnet.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author maxim.levicky
@@ -14,10 +19,15 @@ public class Work extends BaseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     int id;
+
     @Column(name = "type", nullable = false)
     int type;
+
     @Column(name = "name", nullable = false)
     String name;
+
+    @Column(name = "owner_id", nullable = false)
+    String ownerId;
 
 
     public int getId() {
@@ -42,5 +52,13 @@ public class Work extends BaseModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 }

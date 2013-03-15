@@ -10,6 +10,8 @@ import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.worksnet.model.Model;
+
 /**
  * @author maxim.levicky
  *         Date: 2/19/13
@@ -47,12 +49,12 @@ public class DB {
         return session;
     }
 
-    public void save(Object object) {
-        getSession().save(object);
+    public int save(Object object) {
+        return (int) getSession().save(object);
     }
 
-    public void saveOrUpdate(Object object) {
-        getSession().merge(object);
+    public int saveOrUpdate(Object object) {
+        return ((Model) getSession().merge(object)).getId();
     }
 
     public void delete(Object object) {

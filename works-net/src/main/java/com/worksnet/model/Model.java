@@ -6,4 +6,5 @@ package com.worksnet.model;
  *         Time: 12:51 PM
  */
 public interface Model {
+    public int getId();
 }

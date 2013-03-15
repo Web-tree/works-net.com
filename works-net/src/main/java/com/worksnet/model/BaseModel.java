@@ -5,5 +5,5 @@ package com.worksnet.model;
  *         Date: 2/27/13
  *         Time: 12:50 PM
  */
-public class BaseModel implements Model {
+abstract public class BaseModel implements Model {
 }
