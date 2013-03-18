@@ -8,7 +8,7 @@
     <!--
      Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д)
     -->
-    <!--<annotation-driven/>-->
+    <annotation-driven/>
     <!--
      Всю статику (изображения, css-файлы, javascript) положим в папку webapp/resources
             и замаппим их на урл вида /resources/**

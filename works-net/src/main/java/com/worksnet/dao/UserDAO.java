@@ -1,9 +1,10 @@
 package com.worksnet.dao;
 
-import com.worksnet.model.User;
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.List;
+import com.worksnet.model.User;
 
 /**
  * @author maxim.levicky
@@ -13,7 +14,7 @@ import java.util.List;
 public class UserDAO extends BaseDAO<User> {
 
     public User getByName(String name) throws UsernameNotFoundException {
-        List<User> users = db.find("from User where name = ?", name);
+        List<User> users = db.find("from User where username = '"+name+"'");
         if (users.isEmpty()) {
             throw new UsernameNotFoundException("User" + name + "not found");
         }

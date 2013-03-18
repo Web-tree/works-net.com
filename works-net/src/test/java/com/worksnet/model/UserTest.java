@@ -1,9 +1,10 @@
 package com.worksnet.model;
 
-import junit.framework.TestCase;
-import org.junit.Test;
-
 import java.util.Date;
+
+import junit.framework.TestCase;
+
+import org.junit.Test;
 
 /**
  * @author maxim.levicky
@@ -23,12 +24,10 @@ public class UserTest extends TestCase {
         user.setId(id);
         user.setUserName(name);
         user.setEmail(email);
-        user.setBirth(birth);
 
         assertEquals("wrong id", user.getId(), id);
         assertEquals("wrong name", user.getUserName(), name);
         assertEquals("wrong email", user.getEmail(), email);
-        assertEquals("wrong birth", user.getBirth(), birth);
     }
 
 }

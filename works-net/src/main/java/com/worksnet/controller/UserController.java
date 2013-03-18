@@ -1,19 +1,25 @@
 package com.worksnet.controller;
 
-import com.worksnet.model.User;
-import com.worksnet.service.UserService;
-import com.worksnet.validator.UserValidator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.worksnet.model.User;
+import com.worksnet.service.UserService;
+import com.worksnet.validator.UserValidator;
 
 /**
  * @author maxim.levicky
@@ -23,7 +29,8 @@ import java.util.Date;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
-    //    @Autowired
+    @Qualifier("userService")
+    @Autowired
     protected UserService service;
 
     @Autowired

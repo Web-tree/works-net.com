@@ -1,6 +1,10 @@
 package com.worksnet.utils;
 
-import com.worksnet.model.Model;
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
 import org.hibernate.FlushMode;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -8,9 +12,7 @@ import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import java.io.Serializable;
-import java.util.List;
+import com.worksnet.model.Model;
 
 /**
  * @author maxim.levicky
@@ -57,7 +59,7 @@ public class DB {
     @SuppressWarnings("unchecked")
     public <T> List<T> find(String queryString, String... params) {
         Query query = getSession().createQuery(queryString);
-        int i = 1;
+        int i = 0;
         for (String param : params) {
             query.setString(i++, param);
         }

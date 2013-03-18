@@ -1,17 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page session="false" %>
+<%--<%@ page session="false" %>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="body">
     <table>
-            <%--@elvariable id="users" type="java.util.List<User>"--%>
+        <%--@elvariable id="users" type="java.util.List<User>"--%>
         <c:forEach items="${users}" var="user">
             <tr>
                 <td><c:out value="${user.userName}"/></td>
                 <td><c:out value="${user.email}"/></td>
-                <td><c:out value="${user.birth}"/></td>
+                <td><c:out value="${user.password}"/></td>
                 <td><a href='<c:url value="user/${user.id}/edit"/>'>Edit</a></td>
                 <td><a href='<c:url value="user/${user.id}/delete"/>'>Delete</a></td>
             </tr>
@@ -30,8 +30,12 @@
                 <td><form:input path="email"/><form:errors path="email"/></td>
             </tr>
             <tr>
-                <td>Birth</td>
-                <td><form:input path="birth"/><form:errors path="birth"/></td>
+                <td>Password</td>
+                <td><form:input path="password"/><form:errors path="password"/></td>
+            </tr>
+            <tr>
+                <td>Enabled</td>
+                <td><form:input path="enabled"/><form:errors path="enabled"/></td>
             </tr>
             <tr>
                 <td></td>

@@ -1,11 +1,17 @@
 package com.worksnet.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
 
 
 /**
@@ -30,9 +36,6 @@ public class User extends BaseModel implements UserDetails {
     @Column(name = "email", nullable = false, unique = true, length = 128)
     private String email;
 
-    @Column(name = "birth", nullable = false)
-    private Date birth;
-
     @Column(name = "enabled", nullable = false)
     private boolean enabled = false;
 
@@ -42,6 +45,8 @@ public class User extends BaseModel implements UserDetails {
     @Column(name = "locked")
     private boolean accountNonLocked = true;
 
+    @Column(name = "auth_role")
+    private int authRole = 1;
 
     public int getId() {
         return id;
@@ -61,7 +66,25 @@ public class User extends BaseModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Collection auth = new ArrayList<GrantedAuthority> ();
+        auth.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                String authority;
+                switch (authRole) {
+                    case 1:
+                        authority = "ROLE_USER";
+                        break;
+                    case 2:
+                        authority = "ROLE_ADMIN";
+                        break;
+                    default:
+                        authority = "ROLE_ANONYMOUS";
+                }
+                return authority;
+            }
+        });
+        return auth;
     }
 
     public String getPassword() {
@@ -100,14 +123,6 @@ public class User extends BaseModel implements UserDetails {
         this.email = email;
     }
 
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
     public boolean isEnabled() {
         return enabled;
     }
@@ -116,15 +131,11 @@ public class User extends BaseModel implements UserDetails {
         this.enabled = enabled;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User user = (User) object;
-        return user.getId() == getId()
-                && user.getEmail().equals(getEmail())
-                && user.getUserName().equals(getUserName())
-                && user.getBirth().equals(getBirth());
+    public int getAuthRole() {
+        return authRole;
+    }
+
+    public void setAuthRole(int authRole) {
+        this.authRole = authRole;
     }
 }
