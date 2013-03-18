@@ -40,15 +40,20 @@ public class DB {
     }
 
     public int save(Object object) {
-        return ((Model) getSession().save(object)).getId();
+        Serializable saved = getSession().save(object);
+        getSession().flush();
+        return ((Model) saved).getId();
     }
 
     public int saveOrUpdate(Object object) {
-        return ((Model) getSession().merge(object)).getId();
+        Object merged = getSession().merge(object);
+        getSession().flush();
+        return ((Model) merged).getId();
     }
 
     public void delete(Object object) {
         getSession().delete(object);
+        getSession().flush();
     }
 
     @SuppressWarnings("unchecked")
