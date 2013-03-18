@@ -9,7 +9,7 @@
             <%--@elvariable id="users" type="java.util.List<User>"--%>
         <c:forEach items="${users}" var="user">
             <tr>
-                <td><c:out value="${user.name}"/></td>
+                <td><c:out value="${user.userName}"/></td>
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.birth}"/></td>
                 <td><a href='<c:url value="user/${user.id}/edit"/>'>Edit</a></td>
@@ -23,7 +23,7 @@
         <table>
             <tr>
                 <td>Name</td>
-                <td><form:input path="name"/><form:errors path="name"/></td>
+                <td><form:input path="userName"/><form:errors path="userName"/></td>
             </tr>
             <tr>
                 <td>Email</td>

@@ -14,12 +14,13 @@
         <remember-me/>
     </http>
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="pass" authorities="ROLE_ADMIN,ROLE_USER"/>
-                <user name="user1" password="1111" authorities="ROLE_USER"/>
-                <user name="user2" password="2222" disabled="true" authorities="ROLE_USER"/>
-            </user-service>
-        </authentication-provider>
+        <authentication-provider user-service-ref="userService"/>
+        <!--<user-service>-->
+        <!--<user name="admin" password="pass" authorities="ROLE_ADMIN,ROLE_USER"/>-->
+        <!--<user name="user1" password="1111" authorities="ROLE_USER"/>-->
+        <!--<user name="user2" password="2222" disabled="true" authorities="ROLE_USER"/>-->
+        <!--</user-service>-->
+        <!--</authentication-provider>-->
     </authentication-manager>
+    <!--<beans:bean class="com.worksnet.service.SpringUserService" name="springUserService"/>-->
 </beans:beans>

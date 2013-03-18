@@ -1,10 +1,8 @@
 package com.worksnet.model;
 
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import com.worksnet.service.UserService;
+import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * @author maxim.levicky
@@ -27,7 +25,7 @@ public class UserServiceTest extends TestCase {
     @Test
     public void testAddUser() throws Exception {
         User user = new User();
-        user.setName("TestUser");
+        user.setUserName("TestUser");
 
 
         int userId = service.add(user);

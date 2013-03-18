@@ -1,24 +1,19 @@
 package com.worksnet.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.worksnet.model.User;
+import com.worksnet.service.UserService;
+import com.worksnet.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.worksnet.model.User;
-import com.worksnet.service.UserService;
-import com.worksnet.validator.UserValidator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author maxim.levicky
@@ -28,7 +23,7 @@ import com.worksnet.validator.UserValidator;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
-    @Autowired
+    //    @Autowired
     protected UserService service;
 
     @Autowired
@@ -72,5 +67,9 @@ public class UserController extends BaseController {
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    }
+
+    public void setService(UserService service) {
+        this.service = service;
     }
 }

@@ -1,16 +1,16 @@
 package com.worksnet.utils;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
+import com.worksnet.model.Model;
+import org.hibernate.FlushMode;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.worksnet.model.Model;
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -23,22 +23,10 @@ public class DB {
     private SessionFactory sessionFactory;
     private Session session;
 
-//    private static SessionFactory buildSessionFactory() {
-////        try {
-////            // Create the SessionFactory from hibernate.cfg.xml
-////            System.out.print(Conf.get("webinfPath"));
-////            return new AnnotationConfiguration()
-////                    .configure(Conf.get("webinfPath") + "/hibernate.cfg.xml")
-////                    .buildSessionFactory();
-////        } catch (Throwable ex) {
-////            System.err.println("Initial SessionFactory creation failed." + ex);
-////            throw new ExceptionInInitializerError(ex);
-////        }
-//    }
-
     @PostConstruct
     private void initSession() {
         session = getSessionFactory().openSession();
+        session.setFlushMode(FlushMode.MANUAL);
     }
 
     private SessionFactory getSessionFactory() {
@@ -50,7 +38,7 @@ public class DB {
     }
 
     public int save(Object object) {
-        return (int) getSession().save(object);
+        return ((Model) getSession().save(object)).getId();
     }
 
     public int saveOrUpdate(Object object) {
@@ -67,7 +55,12 @@ public class DB {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> List<T> find(String query) {
-        return (List<T>) getSession().createQuery(query).list();
+    public <T> List<T> find(String queryString, String... params) {
+        Query query = getSession().createQuery(queryString);
+        int i = 1;
+        for (String param : params) {
+            query.setString(i++, param);
+        }
+        return (List<T>) query.list();
     }
 }

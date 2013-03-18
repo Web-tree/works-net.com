@@ -21,5 +21,10 @@
     <bean name="userValidator" class="com.worksnet.validator.UserValidator"/>
     <bean name="workValidator" class="com.worksnet.validator.WorkValidator"/>
 
+    <!--<context:component-scan base-package="com.worksnet.controller"/>-->
+
+    <bean name="userController" class="com.worksnet.controller.UserController">
+        <property name="service" ref="userService"/>
+    </bean>
 
 </beans>

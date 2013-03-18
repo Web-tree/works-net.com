@@ -1,11 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="body">
     <table>
-        <%--@elvariable id="works" type="java.util.List<Work>"--%>
+
+            <%--@elvariable id="works" type="java.util.List<Work>"--%>
         <c:forEach items="${works}" var="work">
             <tr>
                 <td><c:out value="${work.name}"/></td>
@@ -19,11 +21,14 @@
         <form:hidden path="id"/>
         <table>
             <tr>
-                <td>Name</td>
-                <td><form:input path="name"/><form:errors path="name"/></td>
+                <td><spring:message code="work.userName"/></td>
+                <td><form:input path="userName"/><form:errors path="userName"/></td>
             </tr>
             <tr>
-                <td></td>
+                <td><spring:message code="work.description"/></td>
+                <td><form:input path="description"/><form:errors path="description"/></td>
+            </tr>
+            <tr>
                 <td><input type="submit"></td>
             </tr>
         </table>
