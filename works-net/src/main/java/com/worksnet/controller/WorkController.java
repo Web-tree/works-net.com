@@ -27,6 +27,7 @@ import com.worksnet.validator.WorkValidator;
  *         Time: 3:12 PM
  */
 @Controller
+@RequestMapping(value = "/work")
 public class WorkController extends BaseController {
     @Autowired
     protected WorkService service;
@@ -34,14 +35,20 @@ public class WorkController extends BaseController {
     @Autowired
     private WorkValidator workValidator;
 
-    @RequestMapping(value = "/work", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView get() {
         return new ModelAndView()
                 .addObject("works", service.getList())
                 .addObject("work", new Work());
     }
 
-    @RequestMapping(value = "/work", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String getOne(@PathVariable String id, Model model) {
+        model.addAttribute("work", service.getById(Integer.parseInt(id)));
+        return "/work/single";
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public String add(@ModelAttribute("work") Work work, BindingResult result) {
         workValidator.validate(work, result);
 
@@ -55,9 +62,9 @@ public class WorkController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/work/{id}/{action}")
-    public String edit(@PathVariable String id, @PathVariable String action, Model model) {
-        Work work = service.getById(Integer.parseInt(id));
+    @RequestMapping(value = "/{id}/{action}")
+    public String edit(@PathVariable int id, @PathVariable String action, Model model) {
+        Work work = service.getById(id);
         switch (action) {
             case "edit":
                 model.addAttribute("work", work);

@@ -11,8 +11,8 @@
         <c:forEach items="${works}" var="work">
             <tr>
                 <td><c:out value="${work.name}"/></td>
-                <td><a href='<c:url value="work/${work.id}/edit"/>'>Edit</a></td>
-                <td><a href='<c:url value="work/${work.id}/delete"/>'>Delete</a></td>
+                <td><a href='<c:url value="/work/${work.id}/edit"/>'>Edit</a></td>
+                <td><a href='<c:url value="/work/${work.id}/delete"/>'>Delete</a></td>
             </tr>
         </c:forEach>
     </table>
