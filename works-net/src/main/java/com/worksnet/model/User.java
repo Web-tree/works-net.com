@@ -66,7 +66,7 @@ public class User extends BaseModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection auth = new ArrayList<GrantedAuthority> ();
+        Collection<GrantedAuthority> auth = new ArrayList<> ();
         auth.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
