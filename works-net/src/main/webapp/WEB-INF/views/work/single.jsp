@@ -4,7 +4,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="helper" uri="http://works-net.com/tags/ViewHelper"  %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="tags" %>
 
 <c:set var="body">
     <div class="work name">${work.name}</div>
