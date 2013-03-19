@@ -11,6 +11,7 @@
     <c:if test="${helper:checkCurrentUser(work.ownerId)}">
         <a href="<c:url value="/work/${work.id}/edit"/>"><tags:message code="work.edit"/></a>
     </c:if>
+
 </c:set>
 
 <%@ include file="../../layouts/index.jsp" %>

@@ -28,4 +28,8 @@ public class UserService extends BaseService<User> {
             return new User();
         }
     }
+
+    public static boolean isAuthorized() {
+        return SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User;
+    }
 }
