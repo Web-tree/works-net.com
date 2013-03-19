@@ -37,7 +37,19 @@ public class UserController extends BaseController {
     private UserValidator userValidator;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelAndView get() {
+    public String getList(Model model) {
+        model.addAttribute("users", service.getList());
+        return "/user/list";
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String getSingle(@PathVariable int id, Model model) {
+        model.addAttribute("user", service.getById(id));
+        return "/user/single";
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public ModelAndView getAdmin() {
         return new ModelAndView()
                 .addObject("templateName", "user")
                 .addObject("users", service.getList())
