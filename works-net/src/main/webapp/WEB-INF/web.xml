@@ -20,6 +20,10 @@
     </context-param>
 
     <jsp-config>
+        <taglib>
+            <taglib-uri>http://works-net.com/tags/ViewHelper</taglib-uri>
+            <taglib-location>/WEB-INF/tags/ViewHelper.tld</taglib-location>
+        </taglib>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
             <trim-directive-whitespaces>true</trim-directive-whitespaces>
