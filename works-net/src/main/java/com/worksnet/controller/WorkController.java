@@ -1,25 +1,20 @@
 package com.worksnet.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.worksnet.model.Work;
+import com.worksnet.service.UserService;
+import com.worksnet.service.WorkService;
+import com.worksnet.validator.WorkValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.worksnet.model.Work;
-import com.worksnet.service.UserService;
-import com.worksnet.service.WorkService;
-import com.worksnet.validator.WorkValidator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author maxim.levicky
@@ -36,6 +31,12 @@ public class WorkController extends BaseController {
     private WorkValidator workValidator;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
+    public String getList(Model model) {
+        model.addAttribute("works", service.getList());
+        return "/work/list";
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView get() {
         return new ModelAndView()
                 .addObject("works", service.getList())
@@ -73,7 +74,7 @@ public class WorkController extends BaseController {
                 service.delete(work);
                 return "redirect:/work";
         }
-        return "/work";
+        return "/work/" + id + "/" + action;
     }
 
     @InitBinder

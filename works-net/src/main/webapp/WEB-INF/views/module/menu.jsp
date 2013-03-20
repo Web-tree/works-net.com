@@ -7,11 +7,11 @@
         <a class="brand" href="<c:url value="/"/>">Works-Net</a>
         <ul class="nav">
             <li class="dropdown">
-                <a class="dropdown-toggle" href="<c:url value="/work/all"/>"><tags:message code="menu.works"/></a>
+                <a class="dropdown-toggle" href="<c:url value="/work"/>"><tags:message code="menu.works"/></a>
                 <c:if test="${helper:isAuthorized()}">
                     <ul class="dropdown-menu">
+                        <li><a href="<c:url value="/work"/>"><tags:message code="menu.works.all"/></a></li>
                         <li><a href="<c:url value="/work/my"/>"><tags:message code="menu.works.my"/></a></li>
-                        <li><a href="<c:url value="/work/all"/>"><tags:message code="menu.works.all"/></a></li>
                     </ul>
                 </c:if>
             </li>
