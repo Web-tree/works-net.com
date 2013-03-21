@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.hibernate.Criteria;
 import org.hibernate.FlushMode;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -62,12 +63,12 @@ public class DB {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> List<T> find(String queryString, String... params) {
+    public <T> List<T> find(String queryString) {
         Query query = getSession().createQuery(queryString);
-        int i = 0;
-        for (String param : params) {
-            query.setString(i++, param);
-        }
         return (List<T>) query.list();
+    }
+
+    public Criteria createCriteria(Class clazz) {
+        return getSession().createCriteria(clazz);
     }
 }
