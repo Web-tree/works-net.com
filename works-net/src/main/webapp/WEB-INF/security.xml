@@ -2,8 +2,8 @@
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
-    <http auto-config="true" access-denied-page="/error403.jsp">
-        <intercept-url pattern="/user" method="GET" access="ROLE_USER,ROLE_ANONYMOUS"/>
+    <http auto-config="true" access-denied-page="/error403.jsp" access-decision-manager-ref="accessDecisionManager">
+        <intercept-url pattern="/user" method="GET" access="ROLE_ADMIN,ROLE_USER,ROLE_ANONYMOUS"/>
         <intercept-url pattern="/user" method="POST" access="ROLE_ADMIN"/>
         <intercept-url pattern="/user/*/edit" access="ROLE_USER"/>
         <intercept-url pattern="/user/*/delete" access="ROLE_ADMIN"/>
@@ -22,5 +22,28 @@
         <!--</user-service>-->
         <!--</authentication-provider>-->
     </authentication-manager>
+
+    <beans:bean id="roleVoter" class="org.springframework.security.access.vote.RoleHierarchyVoter">
+        <beans:constructor-arg ref="roleHierarchy"/>
+    </beans:bean>
+
+    <beans:bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+        <beans:property name="hierarchy">
+            <beans:value>
+                ROLE_ADMIN > ROLE_STAFF
+                ROLE_STAFF > ROLE_USER
+                ROLE_USER > ROLE_GUEST
+            </beans:value>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+        <beans:property name="decisionVoters">
+            <beans:list>
+                <beans:ref bean="roleVoter"/>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
     <!--<beans:bean class="com.worksnet.service.SpringUserService" name="springUserService"/>-->
 </beans:beans>
