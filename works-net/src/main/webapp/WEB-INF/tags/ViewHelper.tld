@@ -18,4 +18,10 @@
         <function-class>com.worksnet.service.UserService</function-class>
         <function-signature>boolean isAuthorized()</function-signature>
     </function>
+    <function>
+        <name>getCurrentUser</name>
+        <function-class>com.worksnet.service.UserService</function-class>
+        <function-signature>com.worksnet.model.User getCurrentUser()</function-signature>
+    </function>
+
 </taglib>
