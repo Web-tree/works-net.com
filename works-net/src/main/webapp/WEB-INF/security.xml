@@ -7,20 +7,14 @@
         <intercept-url pattern="/user" method="POST" access="ROLE_ADMIN"/>
         <intercept-url pattern="/user/*/edit" access="ROLE_USER"/>
         <intercept-url pattern="/user/*/delete" access="ROLE_ADMIN"/>
-        <form-login login-page="/login.jsp" default-target-url="/"
-                    authentication-failure-url="/login.jsp?error=true"/>
+        <form-login login-page="/login" default-target-url="/"
+                    authentication-failure-url="/login?error=true"/>
         <logout logout-url="/logout" logout-success-url="/"/>
         <anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
         <!--<remember-me/>-->
     </http>
     <authentication-manager>
         <authentication-provider user-service-ref="userDetailsService"/>
-        <!--<user-service>-->
-        <!--<user name="admin" password="pass" authorities="ROLE_ADMIN,ROLE_USER"/>-->
-        <!--<user name="user1" password="1111" authorities="ROLE_USER"/>-->
-        <!--<user name="user2" password="2222" disabled="true" authorities="ROLE_USER"/>-->
-        <!--</user-service>-->
-        <!--</authentication-provider>-->
     </authentication-manager>
 
     <beans:bean id="roleVoter" class="org.springframework.security.access.vote.RoleHierarchyVoter">

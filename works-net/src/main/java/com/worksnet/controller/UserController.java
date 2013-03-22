@@ -1,8 +1,8 @@
 package com.worksnet.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.worksnet.model.User;
+import com.worksnet.service.UserService;
+import com.worksnet.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -10,16 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
-import com.worksnet.model.User;
-import com.worksnet.service.UserService;
-import com.worksnet.validator.UserValidator;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author maxim.levicky
@@ -49,11 +43,12 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView getAdmin() {
-        return new ModelAndView()
-                .addObject("templateName", "user")
-                .addObject("users", service.getList())
-                .addObject("user", new User());
+    public String getAdmin(Model model) {
+        model
+                .addAttribute("templateName", "user")
+                .addAttribute("users", service.getList())
+                .addAttribute("user", new User());
+        return "/user/admin";
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)

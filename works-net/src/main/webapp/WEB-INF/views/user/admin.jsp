@@ -6,7 +6,7 @@
 
 <c:set var="body">
     <table>
-        <%--@elvariable id="users" type="java.util.List<User>"--%>
+            <%--@elvariable id="users" type="java.util.List<User>"--%>
         <c:forEach items="${users}" var="user">
             <tr>
                 <td><c:out value="${user.userName}"/></td>
@@ -46,4 +46,4 @@
 
 </c:set>
 
-<%@ include file="../layouts/index.jsp" %>
+<%@ include file="../../layouts/index.jsp" %>

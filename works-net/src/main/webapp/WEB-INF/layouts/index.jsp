@@ -14,16 +14,11 @@
 </head>
 <body>
 <div class="container">
-    <div class="row-fluid">
-        <div class="span9">
-            <header>
-                <%@ include file="../views/module/menu.jsp" %>
-
-            </header>
-            ${body}
-        </div>
-
-    </div>
+    <header>
+        <%@ include file="../views/module/header.jsp" %>
+    </header>
+    <div class="body">${body}</div>
+    <footer></footer>
 </div>
 </body>
 </html>

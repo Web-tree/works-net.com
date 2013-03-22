@@ -35,4 +35,4 @@
     </form:form>
 </c:set>
 
-<%@ include file="../layouts/index.jsp" %>
+<%@ include file="../../layouts/index.jsp" %>

@@ -19,5 +19,18 @@
                 <a class="dropdown-toggle" href="<c:url value="/user"/>"><tags:message code="menu.users"/></a>
             </li>
         </ul>
+        <ul class="nav pull-right">
+            <li>
+                <c:choose>
+                    <c:when test="${helper:isAuthorized()}">
+                        <a href="<c:url value="/user/${helper:getCurrentUser().id}"/>">${helper:getCurrentUser().userName}</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value="/login"/>"><tags:message code="login.login"/></a>
+                    </c:otherwise>
+                </c:choose>
+            </li>
+        </ul>
     </div>
+
 </div>
