@@ -1,11 +1,12 @@
 package com.worksnet.dao;
 
-import com.worksnet.model.Model;
-import com.worksnet.utils.DB;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.worksnet.model.Model;
+import com.worksnet.utils.DB;
 
 /**
  * @author maxim.levicky
@@ -20,8 +21,15 @@ abstract public class BaseDAO<T extends Model> implements DAO<T> {
         return db.save(model);
     }
 
-    public int update(T model) {
+    public int saveOrUpdate(T model) {
         return db.saveOrUpdate(model);
+    }
+
+    public int save(T model) {
+        return db.save(model);
+    }
+    public void update(T model) {
+        db.update(model);
     }
 
     public void delete(T model) {

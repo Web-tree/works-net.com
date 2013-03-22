@@ -43,7 +43,12 @@ public class DB {
     public int save(Object object) {
         Serializable saved = getSession().save(object);
         getSession().flush();
-        return ((Model) saved).getId();
+        return (int)saved;
+    }
+
+    public void update(Object object) {
+        getSession().update(object);
+        getSession().flush();
     }
 
     public int saveOrUpdate(Object object) {

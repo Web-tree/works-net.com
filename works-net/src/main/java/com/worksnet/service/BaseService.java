@@ -25,8 +25,18 @@ abstract public class BaseService<T extends Model> {
     }
 
     @Transactional
-    public int update(T model) {
-        return dao.update(model);
+    public int saveOrUpdate(T model) {
+        return dao.saveOrUpdate(model);
+    }
+
+    @Transactional
+    public int save(T model) {
+        return dao.save(model);
+    }
+
+    @Transactional
+    public void update(T model) {
+        dao.update(model);
     }
 
     @Transactional

@@ -10,7 +10,11 @@ import java.util.List;
 public interface DAO<T> {
     public int add(T model);
 
-    public int update(T model);
+    public int saveOrUpdate(T model);
+
+    public int save(T model);
+
+    public void update(T model);
 
     public void delete(T model);
 
