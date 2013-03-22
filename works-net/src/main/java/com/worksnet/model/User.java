@@ -1,17 +1,11 @@
 package com.worksnet.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 /**
@@ -39,10 +33,10 @@ public class User extends BaseModel implements UserDetails {
     @Column(name = "enabled", nullable = false)
     private boolean enabled = false;
 
-    @Column(name = "expired")
+    @Column(name = "account_non_expired")
     private boolean accountNonExpired = true;
 
-    @Column(name = "locked")
+    @Column(name = "account_non_locked")
     private boolean accountNonLocked = true;
 
     @Column(name = "auth_role")
@@ -66,7 +60,7 @@ public class User extends BaseModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> auth = new ArrayList<> ();
+        Collection<GrantedAuthority> auth = new ArrayList<>();
         auth.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
