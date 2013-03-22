@@ -2,27 +2,24 @@
 <%--<%@ page session="false" %>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="tags" %>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="helper" uri="http://works-net.com/tags/ViewHelper" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="body">
-    <f:form action="/work/save" modelAttribute="work">
-        <f:hidden path="id"/>
-        <f:hidden path="ownerId"/>
+    <form:form action="/work/save" modelAttribute="work">
         <table>
             <tr>
                 <td><tags:message code="work.name"/></td>
-                <td><f:input path="name"/><f:errors path="name"/></td>
+                <td><form:input path="name"/><form:errors path="name"/></td>
             </tr>
             <tr>
                 <td><tags:message code="work.description"/></td>
-                <td><f:input path="description"/><f:errors path="description"/></td>
+                <td><form:input path="description"/><form:errors path="description"/></td>
             </tr>
             <tr>
                 <td><input type="submit"></td>
             </tr>
         </table>
-    </f:form>
+    </form:form>
 </c:set>
 
 <%@ include file="../../layouts/index.jsp" %>

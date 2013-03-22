@@ -1,15 +1,12 @@
 package com.worksnet.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,37 +57,66 @@ public class WorkController extends BaseController {
         return "/work/single";
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public String add(@ModelAttribute("work") Work work, BindingResult result) {
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addPage(@ModelAttribute("work") Work work) {
+        return "work/add";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addWork(@ModelAttribute("work") Work work, BindingResult result) {
         workValidator.validate(work, result);
 
         work.setOwnerId(UserService.getCurrentUser().getId());
 
         if (result.hasErrors()) {
-            return "/work";
+            return "/work/add";
         }
-        service.update(work);
+        service.add(work);
         return "redirect:/work";
     }
 
-
-    @RequestMapping(value = "/{id}/{action}")
-    public String edit(@PathVariable int id, @PathVariable String action, Model model) {
-        Work work = service.getById(id);
-        switch (action) {
-            case "edit":
-                model.addAttribute("work", work);
-                break;
-            case "delete":
-                service.delete(work);
-                return "redirect:/work";
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(@ModelAttribute("work") Work work, BindingResult result, HttpServletRequest request) {
+        workValidator.validate(work, result);
+        if (work.getId() == 0) {
+            work.setOwnerId(UserService.getCurrentUser().getId());
+        } else {
+            checkOwner(work);
         }
-        return "/work/" + id + "/" + action;
+        service.saveOrUpdate(work);
+        return getBackRedirect(request);
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    @RequestMapping(value = "/{id}/edit")
+    public String edit(@PathVariable int id, Model model) {
+        Work work = service.getById(id);
+        checkOwner(work);
+        model.addAttribute("work", work);
+        return "/work/edit";
+    }
+
+    @RequestMapping(value = "/{id}/delete")
+    public String delete(@PathVariable int id) {
+        Work work = service.getById(id);
+        checkOwner(work);
+        service.delete(work);
+        return "redirect:/work";
+    }
+
+    protected void checkOwner(Work work) throws AccessDeniedException {
+        if (work.getOwnerId() != UserService.getCurrentUser().getId()){
+            throw new AccessDeniedException("Wrong owner");
+        }
+    }
+
+    protected String getBackRedirect(HttpServletRequest request) {
+        String referer = request.getHeader("Referer");
+        String redirect = "redirect:";
+        if (referer == null) {
+            redirect += "/work";
+        } else {
+            redirect += referer;
+        }
+        return redirect;
     }
 }
