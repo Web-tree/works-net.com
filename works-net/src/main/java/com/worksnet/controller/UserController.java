@@ -57,7 +57,7 @@ public class UserController extends BaseController {
         if (result.hasErrors()) {
             return "/user";
         }
-        service.update(user);
+        service.saveOrUpdate(user);
         return "redirect:/user";
     }
 

@@ -29,7 +29,7 @@ public class Work extends BaseModel {
     @Column(name = "description")
     String description;
 
-    @Column(name = "owner_id", nullable = false)
+    @Column(name = "owner_id", nullable = false, updatable = false)
     int ownerId;
 
     public int getId() {
