@@ -20,6 +20,14 @@ public class UserService extends BaseService<User> {
         this.dao = dao;
     }
 
+    public UserDAO getDao() {
+        return (UserDAO) dao;
+    }
+
+    public User getByName(String name) {
+        return getDao().getByName(name);
+    }
+
     public static User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof User) {

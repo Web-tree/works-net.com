@@ -1,12 +1,20 @@
 package com.worksnet.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.Email;
+import org.hibernate.validator.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author maxim.levicky
@@ -19,28 +27,33 @@ public class User extends BaseModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
-    private int id;
+    protected int id;
 
     @Column(name = "username", nullable = false, unique = true, length = 128)
-    private String userName;
+    @Size(min = 3, max = 50)
+    protected String userName;
 
     @Column(name = "password", nullable = false)
-    private String password;
+    @NotEmpty
+    @Size(min = 6, max = 20)
+    protected String password;
 
     @Column(name = "email", nullable = false, unique = true, length = 128)
-    private String email;
+    @NotEmpty
+    @Email
+    protected String email;
 
     @Column(name = "enabled", nullable = false)
-    private boolean enabled = false;
+    protected boolean enabled = false;
 
     @Column(name = "account_non_expired")
-    private boolean accountNonExpired = true;
+    protected boolean accountNonExpired = true;
 
     @Column(name = "account_non_locked")
-    private boolean accountNonLocked = true;
+    protected boolean accountNonLocked = true;
 
     @Column(name = "auth_role")
-    private int authRole = 1;
+    protected int authRole = 1;
 
     public int getId() {
         return id;
