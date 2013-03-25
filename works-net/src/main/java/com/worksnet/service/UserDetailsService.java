@@ -19,14 +19,8 @@ public class UserDetailsService extends UserService implements org.springframewo
         this.dao = dao;
     }
 
-    public UserDAO getDao() {
-        return (UserDAO) dao;
-    }
-
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        return getDao().getByName(username);
+        return getByName(username);
     }
-
-
 }
