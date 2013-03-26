@@ -42,7 +42,6 @@ public class DB {
 
     public int save(Object object) {
         Serializable saved = getSession().save(object);
-        getSession().flush();
         return (int)saved;
     }
 
