@@ -3,6 +3,7 @@ package com.worksnet.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.worksnet.model.Model;
@@ -39,6 +40,13 @@ abstract public class BaseDAO<T extends Model> implements DAO<T> {
     @SuppressWarnings("unchecked")
     public T getById(int id) {
         return db.get(getClassType(), id);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<T> getByParam(Class clazz, String param, Object value) {
+        return db.createCriteria(clazz)
+                .add(Restrictions.eq(param, value))
+                .list();
     }
 
     public List<T> getAll() {
