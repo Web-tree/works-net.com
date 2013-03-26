@@ -1,11 +1,9 @@
 package com.worksnet.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.worksnet.model.workdetails.WorkDetail;
+
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -18,19 +16,26 @@ public class Work extends BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    int id;
+    protected int id;
 
     @Column(name = "type", nullable = false)
-    int type;
+    protected int type;
 
     @Column(name = "name", nullable = false)
-    String name;
+    protected String name;
 
     @Column(name = "description")
-    String description;
+    protected String description;
 
     @Column(name = "owner_id", nullable = false, updatable = false)
-    int ownerId;
+    protected int ownerId;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "WorkDetail",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "work_id")
+    )
+    protected List<WorkDetail> details;
 
     public int getId() {
         return id;
@@ -70,5 +75,13 @@ public class Work extends BaseModel {
 
     public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public List<WorkDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<WorkDetail> details) {
+        this.details = details;
     }
 }

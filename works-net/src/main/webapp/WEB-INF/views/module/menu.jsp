@@ -11,6 +11,7 @@
                 <c:if test="${helper:isAuthorized()}">
                     <ul class="dropdown-menu">
                         <li><a href="<c:url value="/work"/>"><tags:message code="menu.works.all"/></a></li>
+                        <li><a href="<c:url value="/work/add"/>"><tags:message code="menu.works.add"/></a></li>
                         <li><a href="<c:url value="/work/my"/>"><tags:message code="menu.works.my"/></a></li>
                     </ul>
                 </c:if>

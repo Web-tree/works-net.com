@@ -1,8 +1,7 @@
 package com.worksnet.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.worksnet.model.Work;
+import com.worksnet.model.workdetails.WorkDetail;
 import com.worksnet.service.UserService;
 import com.worksnet.service.WorkService;
 import com.worksnet.validator.WorkValidator;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author maxim.levicky
@@ -101,8 +102,14 @@ public class WorkController extends BaseController {
         return "redirect:/work";
     }
 
+    @RequestMapping(value = "details/save", method = RequestMethod.POST)
+    public String addDetails(@ModelAttribute("workDetails") WorkDetail details, HttpServletRequest request) {
+
+        return getBackRedirect(request);
+    }
+
     protected void checkOwner(Work work) throws AccessDeniedException {
-        if (work.getOwnerId() != UserService.getCurrentUser().getId()){
+        if (work.getOwnerId() != UserService.getCurrentUser().getId()) {
             throw new AccessDeniedException("Wrong owner");
         }
     }

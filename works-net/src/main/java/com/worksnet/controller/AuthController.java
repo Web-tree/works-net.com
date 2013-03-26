@@ -1,8 +1,8 @@
 package com.worksnet.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
+import com.worksnet.model.User;
+import com.worksnet.service.UserService;
+import com.worksnet.validator.RegistrationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,8 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.worksnet.model.User;
-import com.worksnet.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * @author maxim.levicky
@@ -32,7 +32,7 @@ public class AuthController extends BaseController {
     public String login() {
         return "/auth/login";
     }
-    
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage(Model model) {
         model.addAttribute("user", new User());
