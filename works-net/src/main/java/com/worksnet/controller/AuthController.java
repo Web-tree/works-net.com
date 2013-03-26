@@ -1,8 +1,8 @@
 package com.worksnet.controller;
 
-import com.worksnet.model.User;
-import com.worksnet.service.UserService;
-import com.worksnet.validator.RegistrationValidator;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,8 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import com.worksnet.model.User;
+import com.worksnet.service.UserService;
+import com.worksnet.validator.RegistrationValidator;
 
 /**
  * @author maxim.levicky
@@ -41,15 +42,9 @@ public class AuthController extends BaseController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@Valid User user, BindingResult result, HttpServletRequest request) {
-        validator.validate(user, result);
+        validator.validate(user, result, service);
 
         if (result.hasErrors()) {
-            return "/auth/register";
-        }
-
-        if (null != service.getByName(user.getUsername())) {
-            result.rejectValue("userName", "reg.error.duplicateUsername", new Object[]{user.getUsername()},
-                    "Username already exist");
             return "/auth/register";
         }
 

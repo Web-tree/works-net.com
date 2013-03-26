@@ -13,10 +13,18 @@ import com.worksnet.model.User;
  */
 public class UserDAO extends BaseDAO<User> {
 
-    public User getByName(String name) throws UsernameNotFoundException {
-        List<User> users = db.find("from User where username = '"+name+"'");
+    public User getByName(String name) {
+        List<User> users = getByParam(User.class, "userName", name);
         if (users.isEmpty()) {
-            throw new UsernameNotFoundException("User" + name + "not found");
+            return null;
+        }
+        return users.get(0);
+    }
+
+    public User getByEmail(String email) throws UsernameNotFoundException {
+        List<User> users = getByParam(User.class, "email", email);
+        if (users.isEmpty()) {
+            return null;
         }
         return users.get(0);
     }

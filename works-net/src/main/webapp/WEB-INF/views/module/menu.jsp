@@ -21,16 +21,15 @@
             </li>
         </ul>
         <ul class="nav pull-right">
-            <li>
-                <c:choose>
-                    <c:when test="${helper:isAuthorized()}">
-                        <a href="<c:url value="/user/${helper:getCurrentUser().id}"/>">${helper:getCurrentUser().userName}</a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="<c:url value="/login"/>"><tags:message code="login.login"/></a>
-                    </c:otherwise>
-                </c:choose>
-            </li>
+            <c:choose>
+                <c:when test="${helper:isAuthorized()}">
+                    <li><a href="<c:url value="/user/${helper:getCurrentUser().id}"/>">${helper:getCurrentUser().userName}</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="<c:url value="/login"/>"><tags:message code="login.login"/></a></li>
+                    <li><a href="<c:url value="/register"/>"><tags:message code="reg.registration"/></a></li>
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
 

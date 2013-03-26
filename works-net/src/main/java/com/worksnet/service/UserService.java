@@ -2,6 +2,7 @@ package com.worksnet.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.worksnet.dao.UserDAO;
@@ -26,6 +27,10 @@ public class UserService extends BaseService<User> {
 
     public User getByName(String name) {
         return getDao().getByName(name);
+    }
+
+    public User getByEmail(String email) throws UsernameNotFoundException {
+        return getDao().getByEmail(email);
     }
 
     public static User getCurrentUser() {

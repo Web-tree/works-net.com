@@ -21,6 +21,10 @@ public class UserDetailsService extends UserService implements org.springframewo
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        return getByName(username);
+        User user = getByName(username);
+        if (null == user) {
+            throw new UsernameNotFoundException("User " + username + " not found");
+        }
+        return user;
     }
 }

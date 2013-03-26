@@ -22,7 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *         Time: 2:44 PM
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User extends BaseModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
