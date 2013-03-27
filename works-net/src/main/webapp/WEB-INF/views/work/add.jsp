@@ -13,7 +13,7 @@
             </tr>
             <tr>
                 <td><tags:message code="work.description"/></td>
-                <td><form:input path="description"/><form:errors path="description"/></td>
+                <td><form:textarea path="description"/><form:errors path="description"/></td>
             </tr>
             <tr>
                 <td><input type="submit"></td>

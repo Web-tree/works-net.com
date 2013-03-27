@@ -4,12 +4,16 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="helper" uri="http://works-net.com/tags/ViewHelper" %>
 
-<c:set var="additionalHeaders[]" value="qwe"/>
+<c:set var="pageTitle" value="${work.name}"/>
+<c:set var="isOwner" value="${helper:checkCurrentUser(work.ownerId)}"/>
+<c:set var="additionalHeaders">
+    <script src="<c:url value="/static/js/" "
+</c:set>
 
 <c:set var="body">
-    <div class="work name">${work.name}</div>
+    <h1 class="work name">${work.name}</h1>
     <div class="work description">${work.description}</div>
-    <c:if test="${helper:checkCurrentUser(work.ownerId)}">
+    <c:if test="${isOwner}">
         <a href="<c:url value="/work/${work.id}/edit"/>"><tags:message code="work.edit"/></a>
     </c:if>
 
@@ -24,29 +28,33 @@
         </c:choose>
     </c:forEach>
 
-    <c:if test="${helper:checkCurrentUser(work.ownerId)}">
-        <tags:message code="work.workDetails.add"/>
-        <form cssClass="addWorkDetails">
-            <select>
-                <option value="link"><tags:message code="work.workDetails.link"/></option>
-                <option value="github"><tags:message code="work.workDetails.github"/></option>
-            </select>
-        </form>
+    <c:if test="${isOwner}">
+        <div class="control-group<c:if test="${not empty errorName}"> error</c:if>">
+            <label for="detailsSelector"><tags:message code="work.workDetails.add"/></label>
+            <div class="controls">
+                <form class="addWorkDetails">
+                    <select id="detailsSelector">
+                        <option value="link"><tags:message code="work.workDetails.selectDetails"/></option>
+                        <option value="link"><tags:message code="work.workDetails.link"/></option>
+                        <option value="github"><tags:message code="work.workDetails.github"/></option>
+                    </select>
+                </form>
+            </div>
+        </div>
 
         <div class="workDetails link disabled">
-            <f:form path="/work/details/save" modelAttribute="workDetails">
+            <f:form path="/work/details/save" modelAttribute="linkDetail">
                 <f:hidden path="type" value="1"/>
                 <f:hidden path="workId"/>
                 <f:input path="link" disabled="true"/><f:errors path="link"/>
-
             </f:form>
         </div>
 
         <div class="workDetails link gitHub">
-            <f:form path="/work/details/save" modelAttribute="workDetails">
+            <f:form path="/work/details/save" modelAttribute="githubDetail">
                 <f:hidden path="type" value="2"/>
                 <f:hidden path="workId"/>
-                <f:input path="gitHub" disabled="true"/><f:errors path="gitHub"/>
+                <f:input path="login"/><f:errors path="login"/>
             </f:form>
         </div>
     </c:if>

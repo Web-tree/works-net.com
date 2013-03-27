@@ -16,6 +16,12 @@
     <bean name="userDAO" class="com.worksnet.dao.UserDAO"/>
     <bean name="workDAO" class="com.worksnet.dao.WorkDAO"/>
 
+    <bean name="mailMessageBuilder" class="com.worksnet.utils.MailMessageBuilder"/>
+    <bean name="mailTemplate" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="noreply@works-net.com"/>
+    </bean>
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"/>
+
     <context:component-scan base-package="com.worksnet.service"/>
 
     <bean name="userValidator" class="com.worksnet.validator.UserValidator"/>

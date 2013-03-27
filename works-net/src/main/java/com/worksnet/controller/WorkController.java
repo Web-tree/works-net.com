@@ -1,10 +1,7 @@
 package com.worksnet.controller;
 
-import com.worksnet.model.Work;
-import com.worksnet.model.workdetails.WorkDetail;
-import com.worksnet.service.UserService;
-import com.worksnet.service.WorkService;
-import com.worksnet.validator.WorkValidator;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
@@ -15,7 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
+import com.worksnet.model.Work;
+import com.worksnet.model.workdetails.GitHubDetails;
+import com.worksnet.model.workdetails.LinkDetails;
+import com.worksnet.model.workdetails.WorkDetail;
+import com.worksnet.service.UserService;
+import com.worksnet.service.WorkService;
+import com.worksnet.validator.WorkValidator;
 
 /**
  * @author maxim.levicky
@@ -53,6 +56,8 @@ public class WorkController extends BaseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getOne(@PathVariable String id, Model model) {
         model.addAttribute("work", service.getById(Integer.parseInt(id)));
+        model.addAttribute("linkDetail", new LinkDetails());
+        model.addAttribute("githubDetail", new GitHubDetails());
         return "/work/single";
     }
 
@@ -109,7 +114,7 @@ public class WorkController extends BaseController {
     }
 
     @RequestMapping(value = "details/save", method = RequestMethod.POST)
-    public String addDetails(@ModelAttribute("workDetails") WorkDetail details, HttpServletRequest request) {
+    public String addDetails(@ModelAttribute("workDetail") WorkDetail details, HttpServletRequest request) {
 
         return getBackRedirect(request);
     }
