@@ -26,29 +26,29 @@
 
     <c:if test="${helper:checkCurrentUser(work.ownerId)}">
         <tags:message code="work.workDetails.add"/>
-        <f:form cssClass="addWorkDetails">
-            <f:select path="/work/details/save">
-                <f:option value="link"><tags:message code="work.workDetails.link"/></f:option>
-                <f:option value="github"><tags:message code="work.workDetails.github"/></f:option>
-            </f:select>
+        <form cssClass="addWorkDetails">
+            <select>
+                <option value="link"><tags:message code="work.workDetails.link"/></option>
+                <option value="github"><tags:message code="work.workDetails.github"/></option>
+            </select>
+        </form>
 
-            <div class="workDetails link disabled">
-                <f:form path="/work/details/save">
-                    <f:hidden path="type" value="1"/>
-                    <f:hidden path="workId"/>
-                    <f:input path="link" disabled="true"/><f:errors path="link"/>
+        <div class="workDetails link disabled">
+            <f:form path="/work/details/save" modelAttribute="workDetails">
+                <f:hidden path="type" value="1"/>
+                <f:hidden path="workId"/>
+                <f:input path="link" disabled="true"/><f:errors path="link"/>
 
-                </f:form>
-            </div>
+            </f:form>
+        </div>
 
-            <div class="workDetails link gitHub">
-                <f:form path="/work/details/save">
-                    <f:hidden path="type" value="2"/>
-                    <f:hidden path="workId"/>
-                    <f:input path="gitHub" disabled="true"/><f:errors path="gitHub"/>
-                </f:form>
-            </div>
-        </f:form>
+        <div class="workDetails link gitHub">
+            <f:form path="/work/details/save" modelAttribute="workDetails">
+                <f:hidden path="type" value="2"/>
+                <f:hidden path="workId"/>
+                <f:input path="gitHub" disabled="true"/><f:errors path="gitHub"/>
+            </f:form>
+        </div>
     </c:if>
 </c:set>
 

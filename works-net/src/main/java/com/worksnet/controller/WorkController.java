@@ -77,13 +77,19 @@ public class WorkController extends BaseController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("work") Work work, BindingResult result, HttpServletRequest request) {
         workValidator.validate(work, result);
+        String backUrl;
         if (work.getId() == 0) {
             work.setOwnerId(UserService.getCurrentUser().getId());
+            backUrl = null;
         } else {
             checkOwner(work);
+            backUrl = getBackRedirect(request);
         }
-        service.saveOrUpdate(work);
-        return getBackRedirect(request);
+        int workId = service.saveOrUpdate(work);
+        if (null == backUrl) {
+            backUrl = "redirect:/work/" + workId;
+        }
+        return backUrl;
     }
 
     @RequestMapping(value = "/{id}/edit")

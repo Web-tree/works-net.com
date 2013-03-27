@@ -1,20 +1,14 @@
 package com.worksnet.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
 import org.hibernate.validator.Email;
 import org.hibernate.validator.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author maxim.levicky
@@ -22,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *         Time: 2:44 PM
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User extends BaseModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
