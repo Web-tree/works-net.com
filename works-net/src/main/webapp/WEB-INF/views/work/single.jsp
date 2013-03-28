@@ -7,7 +7,7 @@
 <c:set var="pageTitle" value="${work.name}"/>
 <c:set var="isOwner" value="${helper:checkCurrentUser(work.ownerId)}"/>
 <c:set var="additionalHeaders">
-    <script src="<c:url value="/static/js/" "
+    <script src="<c:url value="/static/js/work.js"/>"></script>
 </c:set>
 
 <c:set var="body">
@@ -34,27 +34,32 @@
             <div class="controls">
                 <form class="addWorkDetails">
                     <select id="detailsSelector">
-                        <option value="link"><tags:message code="work.workDetails.selectDetails"/></option>
+                        <option selected="selected" disabled="disabled"><tags:message code="work.workDetails.selectDetails"/></option>
                         <option value="link"><tags:message code="work.workDetails.link"/></option>
-                        <option value="github"><tags:message code="work.workDetails.github"/></option>
+                        <option value="gitHub"><tags:message code="work.workDetails.github"/></option>
                     </select>
                 </form>
             </div>
         </div>
 
-        <div class="workDetails link disabled">
-            <f:form path="/work/details/save" modelAttribute="linkDetail">
+        <div class="workDetails link hidden">
+            <f:form action="/work/details/save" modelAttribute="linkDetail">
                 <f:hidden path="type" value="1"/>
                 <f:hidden path="workId"/>
-                <f:input path="link" disabled="true"/><f:errors path="link"/>
+                <label for="linkAddInput"><tags:message code="work.workDetails.link"/></label>
+                <f:input id="linkAddInput" path="link"/><f:errors path="link"/>
+                <f:button><tags:message code="add"/></f:button>
             </f:form>
         </div>
 
-        <div class="workDetails link gitHub">
-            <f:form path="/work/details/save" modelAttribute="githubDetail">
+        <div class="workDetails gitHub hidden">
+            <f:form action="/work/details/save" modelAttribute="githubDetail">
                 <f:hidden path="type" value="2"/>
                 <f:hidden path="workId"/>
-                <f:input path="login"/><f:errors path="login"/>
+                <label for="githubAddInput"><tags:message code="work.workDetails.githubLogin"/></label>
+                <f:input id="githubAddInput" path="login"/><f:errors path="login"/>
+                <f:button><tags:message code="add"/></f:button>
+
             </f:form>
         </div>
     </c:if>

@@ -15,6 +15,7 @@
     <bean name="DB" scope="singleton" class="com.worksnet.utils.DB"/>
     <bean name="userDAO" class="com.worksnet.dao.UserDAO"/>
     <bean name="workDAO" class="com.worksnet.dao.WorkDAO"/>
+    <bean name="workDetailDAO" class="com.worksnet.dao.WorkDetailDAO"/>
 
     <bean name="mailMessageBuilder" class="com.worksnet.utils.MailMessageBuilder"/>
     <bean name="mailTemplate" class="org.springframework.mail.SimpleMailMessage">

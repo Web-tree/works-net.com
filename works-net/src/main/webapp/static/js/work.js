@@ -1,3 +1,6 @@
 $(document).ready(function(){
-    $(".addWorkDetails select")//TODO
+    $(".addWorkDetails select").change(function(){
+        $(".workDetails").addClass("hidden");
+        $(".workDetails."+$("#detailsSelector option:selected").attr("value")).removeClass("hidden");
+    });
 });

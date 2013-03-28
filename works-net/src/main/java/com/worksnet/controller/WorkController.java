@@ -113,8 +113,10 @@ public class WorkController extends BaseController {
         return "redirect:/work";
     }
 
-    @RequestMapping(value = "details/save", method = RequestMethod.POST)
-    public String addDetails(@ModelAttribute("workDetail") WorkDetail details, HttpServletRequest request) {
+    @RequestMapping(value = "/details/save", method = RequestMethod.POST)
+    public String addDetails(@ModelAttribute("workDetail") WorkDetail details, BindingResult result, HttpServletRequest request) {
+        workValidator.validate(details, result);
+        service.saveDetails(details);
 
         return getBackRedirect(request);
     }
