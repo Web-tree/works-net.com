@@ -12,6 +12,7 @@
 
 <c:set var="body">
     <h1 class="work name">${work.name}</h1>
+
     <div class="work description">${work.description}</div>
     <c:if test="${isOwner}">
         <a href="<c:url value="/work/${work.id}/edit"/>"><tags:message code="work.edit"/></a>
@@ -31,10 +32,12 @@
     <c:if test="${isOwner}">
         <div class="control-group<c:if test="${not empty errorName}"> error</c:if>">
             <label for="detailsSelector"><tags:message code="work.workDetails.add"/></label>
+
             <div class="controls">
                 <form class="addWorkDetails">
                     <select id="detailsSelector">
-                        <option selected="selected" disabled="disabled"><tags:message code="work.workDetails.selectDetails"/></option>
+                        <option selected="selected" disabled="disabled"><tags:message
+                                code="work.workDetails.selectDetails"/></option>
                         <option value="link"><tags:message code="work.workDetails.link"/></option>
                         <option value="gitHub"><tags:message code="work.workDetails.github"/></option>
                     </select>
@@ -44,7 +47,7 @@
 
         <div class="workDetails link hidden">
             <f:form action="/work/details/save" modelAttribute="linkDetail">
-                <f:hidden path="type" value="1"/>
+                <f:hidden path="type" value="LinkDetails"/>
                 <f:hidden path="workId"/>
                 <label for="linkAddInput"><tags:message code="work.workDetails.link"/></label>
                 <f:input id="linkAddInput" path="link"/><f:errors path="link"/>
@@ -54,7 +57,7 @@
 
         <div class="workDetails gitHub hidden">
             <f:form action="/work/details/save" modelAttribute="githubDetail">
-                <f:hidden path="type" value="2"/>
+                <f:hidden path="type" value="GitHubDetails"/>
                 <f:hidden path="workId"/>
                 <label for="githubAddInput"><tags:message code="work.workDetails.githubLogin"/></label>
                 <f:input id="githubAddInput" path="login"/><f:errors path="login"/>

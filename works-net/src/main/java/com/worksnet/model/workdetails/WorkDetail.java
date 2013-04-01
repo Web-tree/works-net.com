@@ -1,14 +1,8 @@
 package com.worksnet.model.workdetails;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import com.worksnet.model.Model;
+
+import javax.persistence.*;
 
 /**
  * @author maxim.levicky
@@ -28,7 +22,7 @@ public class WorkDetail implements Model {
     protected int workId;
 
     @Column(name = "type", nullable = false, insertable = false, updatable = false)
-    protected int type;
+    protected String type;
 
     public int getId() {
         return id;
@@ -46,11 +40,11 @@ public class WorkDetail implements Model {
         this.workId = workId;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

@@ -1,7 +1,6 @@
 package com.worksnet.model.workdetails;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 /**
@@ -10,7 +9,6 @@ import javax.persistence.Entity;
  *         Time: 11:18 AM
  */
 @Entity
-@DiscriminatorValue(value = "1")
 public class LinkDetails extends WorkDetail {
     @Column(name = "link")
     protected String link;
