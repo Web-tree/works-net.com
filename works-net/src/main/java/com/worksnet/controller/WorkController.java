@@ -1,7 +1,11 @@
 package com.worksnet.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.worksnet.model.Work;
+import com.worksnet.model.workdetails.GitHubDetails;
+import com.worksnet.model.workdetails.LinkDetails;
+import com.worksnet.service.UserService;
+import com.worksnet.service.WorkService;
+import com.worksnet.validator.WorkValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
@@ -12,13 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.worksnet.model.Work;
-import com.worksnet.model.workdetails.GitHubDetails;
-import com.worksnet.model.workdetails.LinkDetails;
-import com.worksnet.model.workdetails.WorkDetail;
-import com.worksnet.service.UserService;
-import com.worksnet.service.WorkService;
-import com.worksnet.validator.WorkValidator;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author maxim.levicky
@@ -54,8 +52,9 @@ public class WorkController extends BaseController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getOne(@PathVariable String id, Model model) {
-        model.addAttribute("work", service.getById(Integer.parseInt(id)));
+    public String getOne(@PathVariable int id, Model model) {
+        Work byId = service.getById(id);
+        model.addAttribute("work", byId);
         model.addAttribute("linkDetail", new LinkDetails());
         model.addAttribute("githubDetail", new GitHubDetails());
         return "/work/single";
@@ -113,11 +112,20 @@ public class WorkController extends BaseController {
         return "redirect:/work";
     }
 
-    @RequestMapping(value = "/details/save", method = RequestMethod.POST)
-    public String addDetails(@ModelAttribute("workDetail") WorkDetail details, BindingResult result, HttpServletRequest request) {
+    @RequestMapping(value = "/details/save/link", method = RequestMethod.POST)
+    public String saveLinkDetails(@ModelAttribute("linkDetail") LinkDetails details, BindingResult result, HttpServletRequest request) {
         workValidator.validate(details, result);
         service.saveDetails(details);
+        return getBackRedirect(request);
+    }
 
+    @RequestMapping(value = "/details/save/github", method = RequestMethod.POST)
+    public String saveGitHubDetails(@ModelAttribute("githubDetail") GitHubDetails details, BindingResult result, HttpServletRequest request) {
+        workValidator.validate(details, result);
+        if (service.getById(details.getWorkId()).getOwnerId() != UserService.getCurrentUser().getId()) {
+            throw new Error("Try to add details for work with wrong owner.");
+        }
+        service.saveDetails(details);
         return getBackRedirect(request);
     }
 

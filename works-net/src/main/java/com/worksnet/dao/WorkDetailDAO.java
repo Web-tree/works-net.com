@@ -1,6 +1,9 @@
 package com.worksnet.dao;
 
 import com.worksnet.model.workdetails.WorkDetail;
+import org.hibernate.criterion.Restrictions;
+
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -8,6 +11,14 @@ import com.worksnet.model.workdetails.WorkDetail;
  *         Time: 2:35 PM
  */
 public class WorkDetailDAO extends BaseDAO<WorkDetail> {
+
+    @SuppressWarnings("unchecked")
+    public List<WorkDetail> getDetailsByWorkId(int workId) {
+        return (List<WorkDetail>) db.createCriteria(WorkDetail.class)
+                .add(Restrictions.eq("workId", workId))
+                .list();
+    }
+
     @Override
     protected Class<WorkDetail> getClassType() {
         return WorkDetail.class;
