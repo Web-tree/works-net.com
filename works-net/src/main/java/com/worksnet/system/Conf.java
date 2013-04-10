@@ -18,7 +18,7 @@ public class Conf {
     static {
         confPath = System.getProperty("user.home") + "/worksnetConf/";
         if (!new File(confPath).isDirectory()) {
-            throw new Error("Can't find configuration path. Put configs in $HOME/worksnetConf");
+            throw new Error("Can't find configuration path. Put configs in $HOME/worksnetConf/main.properties");
         }
     }
 
