@@ -1,10 +1,6 @@
 package com.worksnet.utils;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
+import com.worksnet.model.Model;
 import org.hibernate.Criteria;
 import org.hibernate.FlushMode;
 import org.hibernate.Query;
@@ -13,7 +9,9 @@ import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.worksnet.model.Model;
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -42,7 +40,8 @@ public class DB {
 
     public int save(Object object) {
         Serializable saved = getSession().save(object);
-        return (int)saved;
+        getSession().clear();
+        return (int) saved;
     }
 
     public void update(Object object) {

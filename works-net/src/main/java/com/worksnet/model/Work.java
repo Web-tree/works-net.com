@@ -30,11 +30,8 @@ public class Work extends BaseModel {
     @Column(name = "owner_id", nullable = false, updatable = false)
     protected int ownerId;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "WorkDetail",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "work_id")
-    )
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "work_id")
     protected List<WorkDetail> details;
 
     public int getId() {
