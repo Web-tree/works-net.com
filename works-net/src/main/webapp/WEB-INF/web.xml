@@ -62,6 +62,15 @@
     </filter-mapping>
 
     <filter>
+        <filter-name>XSS</filter-name>
+        <filter-class>com.worksnet.utils.filter.CrossScriptingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>XSS</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
@@ -69,4 +78,5 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
 </web-app>
