@@ -148,6 +148,31 @@
             <artifactId>mail</artifactId>
             <version>1.4.6</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.mylyn.github</groupId>
+            <artifactId>org.eclipse.egit.github.core</artifactId>
+            <version>2.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2-alpha1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.2-alpha2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nhncorp.ntaf</groupId>
+            <artifactId>ntaf-fitnesse</artifactId>
+            <version>20101108</version>
+        </dependency>
 
     </dependencies>
     <repositories>

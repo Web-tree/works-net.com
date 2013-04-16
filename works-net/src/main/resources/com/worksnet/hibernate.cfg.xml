@@ -8,5 +8,6 @@
         <mapping class="com.worksnet.model.Work"/>
         <mapping class="com.worksnet.model.workdetails.LinkDetails"/>
         <mapping class="com.worksnet.model.workdetails.GitHubDetails"/>
+        <mapping class="com.worksnet.model.oauth.GitHubAuth"/>
     </session-factory>
 </hibernate-configuration>
