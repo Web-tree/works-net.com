@@ -46,8 +46,12 @@
                         <option selected="selected" disabled="disabled">
                             <tags:message code="work.workDetails.selectDetails"/>
                         </option>
-                        <option value="link"><tags:message code="work.workDetails.link"/></option>
-                        <option value="gitHub"><tags:message code="work.workDetails.github"/></option>
+                        <option value="link">
+                            <tags:message code="work.workDetails.link"/>
+                        </option>
+                        <option value="gitHub">
+                            <tags:message code="work.workDetails.github"/>
+                        </option>
                     </select>
                 </form>
             </div>

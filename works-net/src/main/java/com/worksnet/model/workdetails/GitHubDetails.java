@@ -13,11 +13,22 @@ public class GitHubDetails extends WorkDetail {
     @Column(name = "login")
     protected String login;
 
+    @Column(name = "checked")
+    protected boolean checked;
+
     public String getLogin() {
         return login;
     }
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }
