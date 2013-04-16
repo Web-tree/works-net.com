@@ -1,5 +1,6 @@
 package com.worksnet.controller;
 
+import com.worksnet.model.User;
 import com.worksnet.model.Work;
 import com.worksnet.model.workdetails.GitHubDetails;
 import com.worksnet.model.workdetails.LinkDetails;
@@ -8,6 +9,7 @@ import com.worksnet.service.WorkService;
 import com.worksnet.validator.WorkValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -83,16 +85,18 @@ public class WorkController extends BaseController {
         workValidator.validate(work, result);
         String backUrl;
         if (work.getId() == 0) {
-            work.setOwnerId(UserService.getCurrentUser().getId());
-            backUrl = null;
+            User currentUser = UserService.getCurrentUser();
+            if (currentUser.isEnabled()) {
+                throw new UsernameNotFoundException("User not authorized");
+            }
+            work.setOwnerId(currentUser.getId());
         } else {
             checkOwner(work);
-            backUrl = getBackRedirect(request);
         }
         int workId = service.saveOrUpdate(work);
-        if (null == backUrl) {
+//        if (null == backUrl) {
             backUrl = "redirect:/work/" + workId;
-        }
+//        }
         return backUrl;
     }
 

@@ -35,16 +35,6 @@ public class WorkService extends BaseService<Work> {
     }
 
     public int saveDetails(WorkDetail detail) {
-//        switch (detail.getType()) {
-//            case "LinkDetails":
-//                detail = (LinkDetails) detail;
-//                break;
-//            case "GitHubDetails":
-//                detail = (GitHubDetails) detail;
-//                break;
-//            default:
-//                throw new WrongDetailType();
-//        }
         return detailsDAO.save(detail);
     }
 

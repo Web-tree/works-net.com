@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>${pageTitle} - Works-Net.com</title>
+    <title><c:if test="${!empty pageTitle}">${pageTitle} - </c:if>Works-Net.com</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap.min.css"/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap-responsive.min.css"/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/main.css"/>"/>
@@ -17,7 +17,14 @@
     <header>
         <%@ include file="../views/module/header.jsp" %>
     </header>
-    <div class="body">${body}</div>
+    <c:if test="${!empty sideNav}">
+        <div class="span3 bs-docs-sidebar">
+            <ul class="nav nav-tabs nav-stacked">
+                ${sideNav}
+            </ul>
+        </div>
+    </c:if>
+    <div class="body span8">${body}</div>
     <footer></footer>
 </div>
 </body>

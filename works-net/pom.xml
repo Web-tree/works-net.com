@@ -41,6 +41,16 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-webmvc-portlet</artifactId>-->
+            <!--<version>${spring-version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${spring-version}</version>
         </dependency>
@@ -68,11 +78,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
-            <version>${spring-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc-portlet</artifactId>
             <version>${spring-version}</version>
         </dependency>
 
@@ -172,6 +177,11 @@
             <groupId>com.nhncorp.ntaf</groupId>
             <artifactId>ntaf-fitnesse</artifactId>
             <version>20101108</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.9.9</version>
         </dependency>
 
     </dependencies>

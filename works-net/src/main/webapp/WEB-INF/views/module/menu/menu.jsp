@@ -10,9 +10,7 @@
                 <a class="dropdown-toggle" href="<c:url value="/work"/>"><tags:message code="menu.works"/></a>
                 <c:if test="${helper:isAuthorized()}">
                     <ul class="dropdown-menu">
-                        <li><a href="<c:url value="/work"/>"><tags:message code="menu.works.all"/></a></li>
-                        <li><a href="<c:url value="/work/add"/>"><tags:message code="menu.works.add"/></a></li>
-                        <li><a href="<c:url value="/work/my"/>"><tags:message code="menu.works.my"/></a></li>
+                        <%@ include file="subWork.jsp"%>
                     </ul>
                 </c:if>
             </li>

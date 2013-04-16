@@ -5,6 +5,10 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="helper" uri="http://works-net.com/tags/ViewHelper" %>
 
+<c:set var="sideNav">
+    <%@include file="../module/menu/subWork.jsp"%>
+</c:set>
+
 <c:set var="body">
     <f:form action="/work/save" modelAttribute="work">
         <f:hidden path="id"/>

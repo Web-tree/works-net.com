@@ -57,10 +57,9 @@ public class AuthController extends BaseController {
             return "/auth/register";
         }
 
-        mailService.sendEmailConfirmation(user, RequestContextUtils.getLocale(request));
+//        mailService.sendEmailConfirmation(user, RequestContextUtils.getLocale(request));
 
         service.add(user);
-
 
         return "redirect:/confirm/info";
     }

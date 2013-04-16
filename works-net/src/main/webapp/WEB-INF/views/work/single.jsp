@@ -10,6 +10,10 @@
     <script src="<c:url value="/static/js/work.js"/>"></script>
 </c:set>
 
+<c:set var="sideNav">
+    <%@include file="../module/menu/subWork.jsp"%>
+</c:set>
+
 <c:set var="body">
     <h1 class="work name">${work.name}</h1>
 

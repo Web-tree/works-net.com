@@ -5,6 +5,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="helper" uri="http://works-net.com/tags/ViewHelper"  %>
 
+<c:set var="pageTitle">
+    ${user.userName}
+</c:set>
 <c:set var="body">
     <div class="work name">${user.userName}</div>
 </c:set>

@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="body">
-    hi!
+
 </c:set>
 
-<%@ include file="../layouts/index.jsp" %>
+<%@ include file="../../layouts/index.jsp" %>
