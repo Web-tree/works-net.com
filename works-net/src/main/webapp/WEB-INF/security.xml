@@ -11,7 +11,7 @@
                     authentication-failure-url="/login?error=true"/>
         <logout logout-url="/logout" logout-success-url="/"/>
         <anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
-        <remember-me user-service-ref="userDetailsService"/>
+        <remember-me user-service-ref="userDetailsService" data-source-ref="dataSource"/>
     </http>
     <authentication-manager>
         <authentication-provider user-service-ref="userDetailsService"/>
@@ -39,5 +39,4 @@
         </beans:property>
     </beans:bean>
 
-    <!--<beans:bean class="com.worksnet.service.SpringUserService" name="springUserService"/>-->
 </beans:beans>
