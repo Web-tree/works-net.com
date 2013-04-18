@@ -30,7 +30,7 @@ public class Work extends BaseModel {
     @Column(name = "owner_id", nullable = false, updatable = false)
     protected int ownerId;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_id")
     protected List<WorkDetail> details;
 
