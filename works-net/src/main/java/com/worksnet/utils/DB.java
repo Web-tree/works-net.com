@@ -27,7 +27,7 @@ public class DB {
     @PostConstruct
     private void initSession() {
         session = getSessionFactory().openSession();
-        session.setFlushMode(FlushMode.MANUAL);
+//        session.setFlushMode(FlushMode.MANUAL);
     }
 
     private SessionFactory getSessionFactory() {
@@ -46,18 +46,17 @@ public class DB {
 
     public void update(Object object) {
         getSession().update(object);
-        getSession().flush();
+        getSession().clear();
     }
 
     public int saveOrUpdate(Object object) {
         Object merged = getSession().merge(object);
-        getSession().flush();
+        getSession().clear();
         return ((Model) merged).getId();
     }
 
     public void delete(Object object) {
         getSession().delete(object);
-        getSession().flush();
     }
 
     @SuppressWarnings("unchecked")
