@@ -15,8 +15,7 @@
         <input id="_spring_security_remember_me" type="checkbox" name="_spring_security_remember_me"/>
 
         <div>
-            <input type="submit" value="Login"/>
-            <input type="reset" value="Reset"/>
+            <input class="btn" type="submit" value="<tags:message code="login.login"/>"/>
         </div>
     </form>
 

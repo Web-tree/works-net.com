@@ -25,7 +25,7 @@
         <input class="requestUrl" placeholder="url" type="text"/>
     </label>
 
-    <input class="send" type="button" value="send">
+    <input class="send btn" type="button" value="send">
 
     <div class="result"></div>
 </c:set>

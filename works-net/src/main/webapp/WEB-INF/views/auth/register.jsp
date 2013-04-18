@@ -39,7 +39,7 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                <form:button>${submit}</form:button>
+                <form:button class="btn">${submit}</form:button>
             </div>
         </div>
     </form:form>

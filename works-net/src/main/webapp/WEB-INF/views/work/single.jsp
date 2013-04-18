@@ -62,22 +62,22 @@
         </div>
 
         <div class="workDetails link hidden">
-            <f:form action="/work/details/save/link" modelAttribute="linkDetail">
+            <f:form class="form-inline" action="/work/details/save/link" modelAttribute="linkDetail">
                 <f:hidden path="type" value="LinkDetails"/>
                 <f:hidden path="workId" value="${work.id}"/>
                 <label for="linkAddInput"><tags:message code="work.workDetails.link"/></label>
-                <f:input id="linkAddInput" path="link"/><f:errors path="link"/>
-                <f:button><tags:message code="add"/></f:button>
+                <f:input class="input-medium" id="linkAddInput" path="link"/><f:errors path="link"/>
+                <f:button class="btn"><tags:message code="ui.add"/></f:button>
             </f:form>
         </div>
 
         <div class="workDetails gitHub hidden">
-            <f:form action="/work/details/save/github" modelAttribute="githubDetail">
+            <f:form class="form-inline" action="/work/details/save/github" modelAttribute="githubDetail">
                 <f:hidden path="type" value="GitHubDetails"/>
                 <f:hidden path="workId" value="${work.id}"/>
                 <label for="githubAddInput"><tags:message code="work.workDetails.githubLogin"/></label>
-                <f:input id="githubAddInput" path="login"/><f:errors path="login"/>
-                <f:button><tags:message code="add"/></f:button>
+                <f:input class="input-medium" id="githubAddInput" path="login"/><f:errors path="login"/>
+                <f:button class="btn"><tags:message code="ui.add"/></f:button>
 
             </f:form>
         </div>

@@ -20,7 +20,7 @@
                 <td><form:textarea path="description"/><form:errors path="description"/></td>
             </tr>
             <tr>
-                <td><input type="submit"></td>
+                <td><input class="btn" value="<tags:message code="ui.add"/>" type="submit"></td>
             </tr>
         </table>
     </form:form>

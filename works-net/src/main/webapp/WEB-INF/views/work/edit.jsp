@@ -23,7 +23,7 @@
                 <td><f:input path="description"/><f:errors path="description"/></td>
             </tr>
             <tr>
-                <td><input type="submit"></td>
+                <td><input class="btn" value="<tags:message code="ui.save"/>" type="submit"></td>
             </tr>
         </table>
     </f:form>
