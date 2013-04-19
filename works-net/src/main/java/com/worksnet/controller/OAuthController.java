@@ -2,6 +2,7 @@ package com.worksnet.controller;
 
 import com.worksnet.model.oauth.GitHubAuth;
 import com.worksnet.service.OAuthService;
+import com.worksnet.service.UserService;
 import com.worksnet.system.Conf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,8 @@ public class OAuthController extends BaseController {
     public String githubAuthPage(Model model, @RequestParam(value = "code", required = false) String code) {
         if (code != null) {
             try {
-                GitHubAuth gitHubAuth = new GitHubAuth();
-                gitHubAuth.setLogin(service.getGitHubLoginByCode(code));
+                GitHubAuth gitHubAuth = service.getGitHubLoginByCode(code);
+                gitHubAuth.setUserId(UserService.getCurrentUser().getId());
                 service.addGitHubAuth(gitHubAuth);
             } catch (OAuthService.OAuthError oAuthError) {
 //                result.rejectValue("OAuthError", "OAuth.cantAuth");
