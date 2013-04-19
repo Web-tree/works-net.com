@@ -5,6 +5,7 @@ import com.worksnet.model.oauth.GitHubAuth;
 import com.worksnet.system.Conf;
 import com.worksnet.system.Log;
 import com.worksnet.utils.HttpUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class OAuthService {
         dao.addGitHubAuth(gitHubAuth);
     }
 
-    public String getGitHubLoginByCode(String code) throws OAuthError {
+    public GitHubAuth getGitHubLoginByCode(String code) throws OAuthError {
         Map<String, String> params = new HashMap<>();
         params.put("client_id", Conf.get("github.clientId"));
         params.put("client_secret", Conf.get("github.clientSecret"));
@@ -51,16 +52,16 @@ public class OAuthService {
 
         try {
             String url = GitHubUrls.ACCESS_TOKEN.getUrl();
-            Map<String, String> result = HttpUtils.parseHttpParams(HttpUtils.getPostResult(url, params));
+            Map<String, String> result = HttpUtils.parseHttpParams(HttpUtils.sendPostRequest(url, params));
             if (result.containsKey("error")) {
                 Log.log("Git hub auth error: " + result.get("error"));
                 throw new OAuthError();
             } else if (result.containsKey("access_token")) {
                 params.clear();
                 params.put("access_token", result.get("access_token"));
-                String gitHubUser = HttpUtils.getPostResult(GitHubUrls.USER_INFO.getUrl(), params);
+                String gitHubUser = HttpUtils.sendGetRequest(GitHubUrls.USER_INFO.getUrl(), params);
                 System.out.print(gitHubUser);
-                return gitHubUser;
+                return new ObjectMapper().readValue(gitHubUser, GitHubAuth.class);
             }
         } catch (IOException e) {
             Log.log("GitHub get request error.", e);
