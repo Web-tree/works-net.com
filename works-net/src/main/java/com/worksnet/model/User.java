@@ -20,20 +20,19 @@ import java.util.Collection;
 public class User extends BaseModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true, updatable = false)
+    @Column
     protected int id;
 
-    @Column(name = "username", nullable = false, unique = true, length = 128)
+    @Column(name = "username", unique = true, length = 128)
+    @NotEmpty
     @Size(min = 3, max = 50)
     protected String userName;
 
-    @Column(name = "password", nullable = false)
-    @NotEmpty
+    @Column(name = "password", nullable = true)
     @Size(min = 6, max = 20)
     protected String password;
 
-    @Column(name = "email", nullable = false, unique = true, length = 128)
-    @NotEmpty
+    @Column(name = "email", nullable = true, unique = true, length = 128)
     @Email
     protected String email;
 

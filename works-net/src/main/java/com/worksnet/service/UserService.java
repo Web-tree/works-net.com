@@ -1,12 +1,11 @@
 package com.worksnet.service;
 
+import com.worksnet.dao.UserDAO;
+import com.worksnet.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.worksnet.dao.UserDAO;
-import com.worksnet.model.User;
 
 /**
  * @author maxim.levicky
@@ -40,6 +39,12 @@ public class UserService extends BaseService<User> {
         } else {
             return new User();
         }
+    }
+
+    public static User createNewUser(String login) {
+        User user = new User();
+        user.setUserName(login);
+        return user;
     }
 
     public static boolean isAuthorized() {

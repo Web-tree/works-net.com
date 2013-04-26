@@ -1,6 +1,7 @@
 package com.worksnet.service;
 
 import com.worksnet.dao.OAuthDAO;
+import com.worksnet.model.oauth.BaseOAuth;
 import com.worksnet.model.oauth.GitHubAuth;
 import com.worksnet.system.Conf;
 import com.worksnet.system.Log;
@@ -39,6 +40,9 @@ public class OAuthService {
         private String url;
     }
 
+    public static String generateLogin(BaseOAuth oAuth) {
+        return oAuth.getOAuthId() + "@" + oAuth.getProvider();
+    }
 
     public void addGitHubAuth(GitHubAuth gitHubAuth) {
         dao.addGitHubAuth(gitHubAuth);

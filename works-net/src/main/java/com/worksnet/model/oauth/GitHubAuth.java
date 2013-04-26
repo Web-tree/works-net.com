@@ -37,6 +37,10 @@ public class GitHubAuth extends BaseOAuth {
     @JsonProperty("email")
     protected String email;
 
+    @Override
+    public String getProvider() {
+        return "github.com";
+    }
 
     public String getLogin() {
         return login;
