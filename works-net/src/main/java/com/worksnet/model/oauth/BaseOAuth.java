@@ -1,12 +1,10 @@
 package com.worksnet.model.oauth;
 
 import com.worksnet.model.Model;
+import com.worksnet.model.User;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Max Levicky
@@ -15,16 +13,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "oauth_data")
-public class BaseOAuth implements Model {
+abstract public class BaseOAuth implements Model {
     @Id
     protected int id;
 
-    @Column
+    //    @Column(nullable = false)
+    @ManyToOne(targetEntity = User.class)
     protected int userId;
 
     @Column
-    @JsonProperty("id")
     protected String OAuthId;
+
+    abstract public String getProvider();
 
     public int getId() {
         return id;
@@ -42,10 +42,12 @@ public class BaseOAuth implements Model {
         this.userId = userId;
     }
 
+    @JsonProperty("id")
     public String getOAuthId() {
         return OAuthId;
     }
 
+    @JsonProperty("id")
     public void setOAuthId(String OAuthId) {
         this.OAuthId = OAuthId;
     }
