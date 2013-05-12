@@ -1,10 +1,9 @@
 package com.worksnet.dao;
 
-import java.util.List;
-
+import com.worksnet.model.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.worksnet.model.User;
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -30,7 +29,7 @@ public class UserDAO extends BaseDAO<User> {
     }
 
     @Override
-    protected Class<User> getClassType() {
+    protected Class<User> getModelType() {
         return User.class;
     }
 

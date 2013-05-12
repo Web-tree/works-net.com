@@ -12,17 +12,23 @@ import javax.persistence.*;
  *         Time: 23:27
  */
 @Entity
+@DiscriminatorColumn(name = "dtype")
 @Table(name = "oauth_data")
 abstract public class BaseOAuth implements Model {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     protected int id;
 
-    //    @Column(nullable = false)
-    @ManyToOne(targetEntity = User.class)
-    protected int userId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @PrimaryKeyJoinColumn
+    protected User user;
 
     @Column
     protected String OAuthId;
+
+    @Column(name = "dtype", nullable = false, insertable = false, updatable = false)
+    protected String dtype;
 
     abstract public String getProvider();
 
@@ -34,12 +40,12 @@ abstract public class BaseOAuth implements Model {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @JsonProperty("id")
@@ -50,5 +56,13 @@ abstract public class BaseOAuth implements Model {
     @JsonProperty("id")
     public void setOAuthId(String OAuthId) {
         this.OAuthId = OAuthId;
+    }
+
+    public String getDtype() {
+        return dtype;
+    }
+
+    public void setDtype(String type) {
+        this.dtype = type;
     }
 }

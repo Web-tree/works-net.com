@@ -14,6 +14,12 @@
         <label for="_spring_security_remember_me"><tags:message code="login.remember"/></label>
         <input id="_spring_security_remember_me" type="checkbox" name="_spring_security_remember_me"/>
 
+        <div class="oauth">
+            <a href="<c:url value="https://github.com/login/oauth/authorize?client_id=b46f331e788f69968977&scope=user:email"/>">
+                <img alt="GitHub" src="<c:url value="/static/img/oauth/github_32.png"/>"/>
+            </a>
+        </div>
+
         <div>
             <input class="btn" type="submit" value="<tags:message code="login.login"/>"/>
         </div>

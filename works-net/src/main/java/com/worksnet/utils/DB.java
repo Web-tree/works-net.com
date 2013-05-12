@@ -2,9 +2,9 @@ package com.worksnet.utils;
 
 import com.worksnet.model.Model;
 import org.hibernate.Criteria;
-import org.hibernate.FlushMode;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,9 +38,15 @@ public class DB {
         return session;
     }
 
+
+    public Transaction beginTransaction() {
+        return getSession().beginTransaction();
+    }
+
     public int save(Object object) {
         Serializable saved = getSession().save(object);
         getSession().clear();
+        getSession().flush();
         return (int) saved;
     }
 
@@ -72,5 +78,9 @@ public class DB {
 
     public Criteria createCriteria(Class clazz) {
         return getSession().createCriteria(clazz);
+    }
+
+    public Query createQuery(String query) {
+        return getSession().createQuery(query);
     }
 }

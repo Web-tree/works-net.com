@@ -26,7 +26,7 @@
     <bean name="mailTemplate" class="org.springframework.mail.SimpleMailMessage">
         <property name="from" value="noreply@works-net.com"/>
     </bean>
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <bean name="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.live.com"/>
         <property name="port" value="587"/>
         <property name="username" value="test"/>
@@ -36,9 +36,12 @@
 
     <context:component-scan base-package="com.worksnet.service"/>
 
-    <bean name="userValidator" class="com.worksnet.validator.UserValidator"/>
-    <bean name="workValidator" class="com.worksnet.validator.WorkValidator"/>
-    <bean name="registrationValidator" class="com.worksnet.validator.RegistrationValidator"/>
+    <bean id="userService" class="com.worksnet.service.UserService"/>
+
+    <context:component-scan base-package="com.worksnet.validator"/>
+    <!--<bean name="userValidator" class="com.worksnet.validator.UserValidator"/>-->
+    <!--<bean name="workValidator" class="com.worksnet.validator.WorkValidator"/>-->
+    <!--<bean name="registrationValidator" class="com.worksnet.validator.RegistrationValidator"/>-->
 
     <context:component-scan base-package="com.worksnet.controller"/>
 

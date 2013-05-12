@@ -1,6 +1,7 @@
 package com.worksnet.service;
 
 import com.worksnet.dao.OAuthDAO;
+import com.worksnet.model.User;
 import com.worksnet.model.oauth.BaseOAuth;
 import com.worksnet.model.oauth.GitHubAuth;
 import com.worksnet.system.Conf;
@@ -44,8 +45,24 @@ public class OAuthService {
         return oAuth.getOAuthId() + "@" + oAuth.getProvider();
     }
 
-    public void addGitHubAuth(GitHubAuth gitHubAuth) {
-        dao.addGitHubAuth(gitHubAuth);
+    public User userByGitHubAuth(GitHubAuth gitHubAuth) {
+        return dao.getUserByGitHubAuth(gitHubAuth);
+    }
+
+    public void addGitHubAuthWithNewUser(GitHubAuth gitHubAuth) {
+        dao.addGitHubAuthWithNewUser(gitHubAuth);
+    }
+
+    public int addGitHubAuth(GitHubAuth gitHubAuth) {
+        return dao.addGitHubAuth(gitHubAuth);
+    }
+
+    public void updateGitHubAuth(GitHubAuth gitHubAuth) {
+        dao.update(gitHubAuth);
+    }
+
+    public boolean checkGitHubAuthExists(GitHubAuth gitHubAuth) {
+        return dao.isModelExists(gitHubAuth.getId());
     }
 
     public GitHubAuth getGitHubLoginByCode(String code) throws OAuthError {

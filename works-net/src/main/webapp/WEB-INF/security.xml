@@ -3,16 +3,15 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <http auto-config="true" access-denied-page="/error403.jsp" access-decision-manager-ref="accessDecisionManager">
-        <intercept-url pattern="/user" method="GET" access="ROLE_ADMIN,ROLE_USER,ROLE_ANONYMOUS"/>
-        <intercept-url pattern="/user" method="POST" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/user/*/edit" access="ROLE_USER"/>
-        <intercept-url pattern="/user/*/delete" access="ROLE_ADMIN"/>
         <form-login login-page="/login" default-target-url="/"
                     authentication-failure-url="/login?error=true"/>
         <logout logout-url="/logout" logout-success-url="/"/>
         <anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
         <remember-me user-service-ref="userDetailsService" data-source-ref="dataSource"/>
     </http>
+
+    <global-method-security secured-annotations="enabled"/>
+
     <authentication-manager>
         <authentication-provider user-service-ref="userDetailsService"/>
     </authentication-manager>
@@ -35,6 +34,16 @@
         <beans:property name="decisionVoters">
             <beans:list>
                 <beans:ref bean="roleVoter"/>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="providerManager" class="org.springframework.security.authentication.ProviderManager">
+        <beans:property name="providers">
+            <beans:list>
+                <beans:bean class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+                    <beans:constructor-arg value="remember_me_key"/>
+                </beans:bean>
             </beans:list>
         </beans:property>
     </beans:bean>

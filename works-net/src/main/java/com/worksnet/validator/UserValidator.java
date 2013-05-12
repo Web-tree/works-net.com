@@ -1,14 +1,16 @@
 package com.worksnet.validator;
 
-import org.springframework.validation.BindingResult;
-
 import com.worksnet.model.User;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
 
 /**
  * @author maxim.levicky
  *         Date: 2/20/13
  *         Time: 3:11 PM
  */
+@Component
 public class UserValidator {
-    public void validate(User user, BindingResult result) {}
+    public void validate(User user, BindingResult result) {
+    }
 }

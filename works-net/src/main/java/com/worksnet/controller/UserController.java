@@ -23,9 +23,10 @@ import java.util.Date;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
-    @Qualifier("userService")
+
     @Autowired
-    protected UserService service;
+    @Qualifier("userService")
+    public UserService service;
 
     @Autowired
     private UserValidator userValidator;

@@ -10,7 +10,7 @@
                 <a class="dropdown-toggle" href="<c:url value="/work"/>"><tags:message code="menu.works"/></a>
                 <c:if test="${helper:isAuthorized()}">
                     <ul class="dropdown-menu">
-                        <%@ include file="subWork.jsp"%>
+                        <%@ include file="subWork.jsp" %>
                     </ul>
                 </c:if>
             </li>
@@ -21,7 +21,10 @@
         <ul class="nav pull-right">
             <c:choose>
                 <c:when test="${helper:isAuthorized()}">
-                    <li><a href="<c:url value="/user/${helper:getCurrentUser().id}"/>">${helper:getCurrentUser().userName}</a></li>
+                    <li>
+                        <a href="<c:url value="/user/${helper:getCurrentUser().id}"/>">${helper:getCurrentUser().userName}</a>
+                    </li>
+                    <li><a href="<c:url value="/logout"/>"><tags:message code="login.logout"/></a></li>
                 </c:when>
                 <c:otherwise>
                     <li><a href="<c:url value="/login"/>"><tags:message code="login.login"/></a></li>
