@@ -92,7 +92,7 @@ public class WorkController extends BaseController {
 
         if (work.getId() == 0) {
             User currentUser = UserService.getCurrentUser();
-            if (currentUser.isEnabled()) {
+            if (!currentUser.isEnabled()) {
                 throw new UsernameNotFoundException("User not authorized");
             }
             work.setOwnerId(currentUser.getId());

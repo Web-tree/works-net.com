@@ -50,6 +50,7 @@ public class OAuthController extends BaseController {
                         userService.loginByUser(user, request);
                     }
                 }
+                return "redirect:/";
             } catch (OAuthService.OAuthError oAuthError) {
                 oAuthError.printStackTrace();
 //                result.rejectValue("OAuthError", "OAuth.cantAuth");
