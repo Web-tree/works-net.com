@@ -20,7 +20,7 @@ public class WorkDetailDAO extends BaseDAO<WorkDetail> {
     }
 
     @Override
-    protected Class<WorkDetail> getClassType() {
+    protected Class<WorkDetail> getModelType() {
         return WorkDetail.class;
     }
 

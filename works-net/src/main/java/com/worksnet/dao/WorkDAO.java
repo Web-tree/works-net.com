@@ -1,10 +1,9 @@
 package com.worksnet.dao;
 
-import java.util.List;
-
+import com.worksnet.model.Work;
 import org.hibernate.criterion.Restrictions;
 
-import com.worksnet.model.Work;
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -14,7 +13,7 @@ import com.worksnet.model.Work;
 public class WorkDAO extends BaseDAO<Work> {
 
     @Override
-    protected Class<Work> getClassType() {
+    protected Class<Work> getModelType() {
         return Work.class;
     }
 

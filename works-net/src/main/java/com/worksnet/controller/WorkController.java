@@ -9,6 +9,7 @@ import com.worksnet.service.WorkService;
 import com.worksnet.validator.WorkValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,12 +42,14 @@ public class WorkController extends BaseController {
     }
 
     @RequestMapping(value = "/my", method = RequestMethod.GET)
+    @Secured("ROLE_USER")
     public String getMyWorks(Model model) {
         model.addAttribute("works", service.getListByOwner(UserService.getCurrentUser().getId()));
         return "/work/list";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    @Secured("ROLE_ADMIN")
     public String getAdmin(Model model) {
         model.addAttribute("works", service.getList());
         model.addAttribute("work", new Work());
@@ -63,11 +66,13 @@ public class WorkController extends BaseController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @Secured("ROLE_USER")
     public String addPage(@ModelAttribute("work") Work work) {
         return "work/add";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @Secured("ROLE_USER")
     public String addWork(@ModelAttribute("work") Work work, BindingResult result) {
         workValidator.validate(work, result);
 
@@ -81,12 +86,13 @@ public class WorkController extends BaseController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @Secured("ROLE_USER")
     public String save(@ModelAttribute("work") Work work, BindingResult result, HttpServletRequest request) {
         workValidator.validate(work, result);
 
         if (work.getId() == 0) {
             User currentUser = UserService.getCurrentUser();
-            if (currentUser.isEnabled()) {
+            if (!currentUser.isEnabled()) {
                 throw new UsernameNotFoundException("User not authorized");
             }
             work.setOwnerId(currentUser.getId());
@@ -99,6 +105,7 @@ public class WorkController extends BaseController {
     }
 
     @RequestMapping(value = "/{id}/edit")
+    @Secured("ROLE_USER")
     public String edit(@PathVariable int id, Model model) {
         Work work = service.getById(id);
         checkOwner(work);
@@ -107,6 +114,7 @@ public class WorkController extends BaseController {
     }
 
     @RequestMapping(value = "/{id}/delete")
+    @Secured("ROLE_USER")
     public String delete(@PathVariable int id) {
         Work work = service.getById(id);
         checkOwner(work);
@@ -115,6 +123,7 @@ public class WorkController extends BaseController {
     }
 
     @RequestMapping(value = "/details/save/link", method = RequestMethod.POST)
+    @Secured("ROLE_USER")
     public String saveLinkDetails(@ModelAttribute("linkDetail") LinkDetails details, BindingResult result, HttpServletRequest request) {
         workValidator.validate(details, result);
         service.saveDetails(details);
@@ -122,6 +131,7 @@ public class WorkController extends BaseController {
     }
 
     @RequestMapping(value = "/details/save/github", method = RequestMethod.POST)
+    @Secured("ROLE_USER")
     public String saveGitHubDetails(@ModelAttribute("githubDetail") GitHubDetails details, BindingResult result, HttpServletRequest request) {
         workValidator.validate(details, result);
         if (service.getById(details.getWorkId()).getOwnerId() != UserService.getCurrentUser().getId()) {

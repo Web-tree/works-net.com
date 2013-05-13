@@ -1,11 +1,12 @@
 package com.worksnet.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.worksnet.model.User;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.worksnet.dao.UserDAO;
-import com.worksnet.model.User;
 
 /**
  * @author maxim.levicky
@@ -13,11 +14,8 @@ import com.worksnet.model.User;
  *         Time: 10:54 AM
  */
 @Service
-public class UserDetailsService extends UserService implements org.springframework.security.core.userdetails.UserDetailsService {
-    @Autowired
-    public void setDao(UserDAO dao) {
-        this.dao = dao;
-    }
+public class UserDetailsService extends UserService
+        implements org.springframework.security.core.userdetails.UserDetailsService, AuthenticationManager {
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -27,4 +25,15 @@ public class UserDetailsService extends UserService implements org.springframewo
         }
         return user;
     }
+
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        String username = authentication.getName();
+        if (null == getByName(username)) {
+            throw new AuthenticationCredentialsNotFoundException("User " + username + " not found");
+        }
+        authentication.setAuthenticated(true);
+        return authentication;
+    }
+
 }

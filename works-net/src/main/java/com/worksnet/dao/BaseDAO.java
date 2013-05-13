@@ -1,13 +1,14 @@
 package com.worksnet.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.worksnet.model.Model;
+import com.worksnet.utils.DB;
+import org.hibernate.annotations.Table;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.worksnet.model.Model;
-import com.worksnet.utils.DB;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -29,6 +30,7 @@ abstract public class BaseDAO<T extends Model> implements DAO<T> {
     public int save(T model) {
         return db.save(model);
     }
+
     public void update(T model) {
         db.update(model);
     }
@@ -37,9 +39,25 @@ abstract public class BaseDAO<T extends Model> implements DAO<T> {
         db.delete(model);
     }
 
+    public boolean isModelExists(int id) {
+        return (boolean) db.createQuery("SELECT 1 FROM " + getDaoTable() + " WHERE id = '?'")
+                .setInteger(1, id)
+                .uniqueResult();
+    }
+
     @SuppressWarnings("unchecked")
     public T getById(int id) {
-        return db.get(getClassType(), id);
+        return db.get(getModelType(), id);
+    }
+
+    public String getDaoTable() {
+        Annotation[] annotations = getModelType().getAnnotations();
+        for (Annotation annotation : annotations) {
+            if (annotation instanceof Table) {
+                return ((Table) annotation).comment();
+            }
+        }
+        throw new Error("Annotation Table not found in model " + getModelType().getCanonicalName());
     }
 
     @SuppressWarnings("unchecked")
@@ -58,7 +76,7 @@ abstract public class BaseDAO<T extends Model> implements DAO<T> {
         return new ArrayList<T>();
     }
 
-    abstract protected Class<T> getClassType();
+    abstract protected Class<T> getModelType();
 
     abstract protected String getAllQuery();
 

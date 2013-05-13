@@ -1,16 +1,17 @@
 package com.worksnet.validator;
 
-import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
-
 import com.worksnet.model.User;
 import com.worksnet.service.UserService;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 
 /**
  * @author maxim.levicky
  *         Date: 3/25/13
  *         Time: 11:28 AM
  */
+@Component
 public class RegistrationValidator {
     private static final int NAME_LENGTH = 50;
     private static final int EMAIL_LENGTH = 50;
@@ -22,11 +23,11 @@ public class RegistrationValidator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "reg.error.empty.password");
 
         if (user.getUserName().length() > NAME_LENGTH) {
-            errors.rejectValue("name", "reg.error.length.name", new Object[] {NAME_LENGTH}, "Wrong name length");
+            errors.rejectValue("name", "reg.error.length.name", new Object[]{NAME_LENGTH}, "Wrong name length");
         }
 
         if (user.getEmail().length() > EMAIL_LENGTH) {
-            errors.rejectValue("name", "reg.error.length.email", new Object[] {EMAIL_LENGTH}, "Wrong email length");
+            errors.rejectValue("name", "reg.error.length.email", new Object[]{EMAIL_LENGTH}, "Wrong email length");
         }
 
         if (user.getUserName().length() < 1) {
