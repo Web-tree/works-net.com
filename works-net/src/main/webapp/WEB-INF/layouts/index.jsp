@@ -18,6 +18,7 @@
             <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/main.css"/>"/>
             <script src="http://code.jquery.com/jquery.js"></script>
             <script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
+            <script src="<c:url value="/static/js/modalLink.js"/>"></script>
             ${additionalHeaders}
         </head>
         <body>
@@ -34,6 +35,15 @@
             </c:if>
             <div class="body span8">${body}</div>
             <footer></footer>
+        </div>
+        <div id="modal-window" role="dialog" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3></h3>
+            </div>
+            <div class="modal-body">
+
+            </div>
         </div>
         </body>
         </html>

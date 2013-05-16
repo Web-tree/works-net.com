@@ -27,8 +27,8 @@
                     <li><a href="<c:url value="/logout"/>"><tags:message code="login.logout"/></a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="<c:url value="/login"/>"><tags:message code="login.login"/></a></li>
-                    <li><a href="<c:url value="/register"/>"><tags:message code="reg.registration"/></a></li>
+                    <li><a class="modal-link" href="<c:url value="/login"/>"><tags:message code="login.login"/></a></li>
+                    <li><a class="modal-link" href="<c:url value="/register"/>"><tags:message code="reg.registration"/></a></li>
                 </c:otherwise>
             </c:choose>
         </ul>
