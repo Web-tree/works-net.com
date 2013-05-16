@@ -12,6 +12,7 @@
         <html>
         <head>
             <title><c:if test="${!empty pageTitle}">${pageTitle} - </c:if>Works-Net.com</title>
+            <base href="http://${helper:getBaseUrl()}/" />
             <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap.min.css"/>"/>
             <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap-responsive.min.css"/>"/>
             <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/main.css"/>"/>

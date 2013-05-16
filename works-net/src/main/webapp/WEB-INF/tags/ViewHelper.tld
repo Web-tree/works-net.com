@@ -23,5 +23,10 @@
         <function-class>com.worksnet.service.UserService</function-class>
         <function-signature>com.worksnet.model.User getCurrentUser()</function-signature>
     </function>
+    <function>
+        <name>getBaseUrl</name>
+        <function-class>com.worksnet.utils.jsp.tags.ViewHelper</function-class>
+        <function-signature>java.lang.String getBaseUrl()</function-signature>
+    </function>
 
 </taglib>

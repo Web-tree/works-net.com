@@ -3,6 +3,7 @@ package com.worksnet.utils.jsp.tags;
 
 import com.worksnet.model.User;
 import com.worksnet.service.UserService;
+import com.worksnet.system.Conf;
 
 /**
  * @author maxim.levicky
@@ -18,5 +19,9 @@ public class ViewHelper {
 
     public static boolean checkCurrentUser(int userId) {
         return UserService.getCurrentUser().getId() == userId;
+    }
+
+    public static String getBaseUrl() {
+        return Conf.get("url.base");
     }
 }
