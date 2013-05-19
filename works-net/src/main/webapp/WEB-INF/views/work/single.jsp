@@ -7,11 +7,11 @@
 <c:set var="pageTitle" value="${work.name}"/>
 <c:set var="isOwner" value="${helper:checkCurrentUser(work.ownerId)}"/>
 <c:set var="additionalHeaders">
-    <script src="<c:url value="/static/js/work.js"/>"></script>
+    <script src="/static/js/work.js"></script>
 </c:set>
 
 <c:set var="sideNav">
-    <%@include file="../module/menu/subWork.jsp"%>
+    <%@include file="../module/menu/subWork.jsp" %>
 </c:set>
 
 <c:set var="body">
@@ -19,7 +19,7 @@
 
     <div class="work description">${work.description}</div>
     <c:if test="${isOwner}">
-        <a href="<c:url value="/work/${work.id}/edit"/>"><tags:message code="work.edit"/></a>
+        <a href="/work/${work.id}/edit"><tags:message code="work.edit"/></a>
     </c:if>
 
     <div class="workdetails>
@@ -28,8 +28,8 @@
         <c:choose>
             <c:when test="${detail.type == 'LinkDetails'}">
                 <%--@elvariable id="detail" type="com.worksnet.model.workdetails.LinkDetails"--%>
-                <tags:message code="work.workDetails.link.url"/>: <a href="<c:url
-                    value="http://${detail.link}"/>">http://${detail.link}</a>
+                <tags:message
+                        code="work.workDetails.link.url"/>: <a href="http://${detail.link}">http://${detail.link}</a>
             </c:when>
             <c:when test="${detail.type == 'GitHubDetails'}">
                 <%--@elvariable id="detail" type="com.worksnet.model.workdetails.GitHubDetails"--%>

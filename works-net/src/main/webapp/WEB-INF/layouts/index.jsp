@@ -2,7 +2,7 @@
 <%--@elvariable id="additionalHeaders" type="String"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:choose >
+<c:choose>
     <c:when test="${param.layout == 1}">
         <div class="additionalHeaders">${additionalHeaders}</div>
         ${body}
@@ -12,14 +12,14 @@
         <html>
         <head>
             <title><c:if test="${!empty pageTitle}">${pageTitle} - </c:if>Works-Net.com</title>
-            <base href="http://${helper:getBaseUrl()}/" />
-            <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap.min.css"/>"/>
-            <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap-responsive.min.css"/>"/>
-            <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/main.css"/>"/>
+            <base href="http://${helper:getBaseUrl()}/"/>
+            <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"/>
+            <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-responsive.min.css"/>
+            <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
             <script src="http://code.jquery.com/jquery.js"></script>
-            <script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
-            <script src="<c:url value="/static/js/modalLink.js"/>"></script>
-            ${additionalHeaders}
+            <script src="/static/js/bootstrap.min.js"></script>
+            <script src="/static/js/modalLink.js"></script>
+                ${additionalHeaders}
         </head>
         <body>
         <div class="container">
@@ -29,7 +29,7 @@
             <c:if test="${!empty sideNav}">
                 <div class="span3 bs-docs-sidebar">
                     <ul class="nav nav-tabs nav-stacked">
-                        ${sideNav}
+                            ${sideNav}
                     </ul>
                 </div>
             </c:if>

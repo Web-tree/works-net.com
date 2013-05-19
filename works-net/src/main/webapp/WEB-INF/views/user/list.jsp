@@ -8,7 +8,7 @@
     <%--@elvariable id="users" type="java.util.List<User>"--%>
     <c:forEach items="${users}" var="user">
         <div class="user">
-            <a href="<c:url value="/user/${user.id}"/>"><c:out value="${user.userName}"/></a>
+            <a href="/user/${user.id}">${user.userName}</a>
         </div>
     </c:forEach>
 </c:set>

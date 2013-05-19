@@ -12,8 +12,8 @@
                 <td><c:out value="${user.userName}"/></td>
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.password}"/></td>
-                <td><a href='<c:url value="user/${user.id}/edit"/>'>Edit</a></td>
-                <td><a href='<c:url value="user/${user.id}/delete"/>'>Delete</a></td>
+                <td><a href="/user/${user.id}/edit">Edit</a></td>
+                <td><a href="/user/${user.id}/delete">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
