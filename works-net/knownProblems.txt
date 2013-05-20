@@ -1,3 +1,6 @@
 Memory problem.
 fix
 -Xmx1024m -XX:MaxPermSize=512m
+
+Deploy problem
+Deploy from idea must copy contents from webapp to root and webapp/WEB-INF to WEB-INF directories.
