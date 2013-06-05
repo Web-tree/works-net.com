@@ -67,22 +67,19 @@ public class User extends BaseModel implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> auth = new ArrayList<>();
-        auth.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                String authority;
-                switch (authRole) {
-                    case 1:
-                        authority = "ROLE_USER";
-                        break;
-                    case 2:
-                        authority = "ROLE_ADMIN";
-                        break;
-                    default:
-                        authority = "ROLE_ANONYMOUS";
-                }
-                return authority;
+        auth.add(() -> {
+            String authority;
+            switch (authRole) {
+                case 1:
+                    authority = "ROLE_USER";
+                    break;
+                case 2:
+                    authority = "ROLE_ADMIN";
+                    break;
+                default:
+                    authority = "ROLE_ANONYMOUS";
             }
+            return authority;
         });
         return auth;
     }
