@@ -43,6 +43,7 @@
             </div>
         </div>
     </form:form>
+    <p><jsp:include page="oauth/buttons.jsp" /></p>
 </c:set>
 
 <%@ include file="../../layouts/index.jsp" %>
