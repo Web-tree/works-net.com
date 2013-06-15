@@ -27,7 +27,8 @@ public class StaticController extends BaseController {
         return UserService.getCurrentUser();
     }
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String testPage() {
-        return "/static/test";
+    public String testPage() throws Exception {
+        throw new Exception("qwe");
+//        return "/static/test";
     }
 }

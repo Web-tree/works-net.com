@@ -39,10 +39,19 @@
     <bean id="userService" class="com.worksnet.service.UserService"/>
 
     <context:component-scan base-package="com.worksnet.validator"/>
-    <!--<bean name="userValidator" class="com.worksnet.validator.UserValidator"/>-->
-    <!--<bean name="workValidator" class="com.worksnet.validator.WorkValidator"/>-->
-    <!--<bean name="registrationValidator" class="com.worksnet.validator.RegistrationValidator"/>-->
 
-    <context:component-scan base-package="com.worksnet.controller"/>
+    <context:component-scan base-package="com.worksnet.controller" />
 
+    <!--Default exception handler-->
+    <bean class="com.worksnet.system.UncaughtExceptionHandler"/>
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <map>
+                <!--<entry key="DataAccessException" value="data-error" />-->
+                <!--<entry key="com.stuff.MyAppRuntimeException" value="app-unchecked-error" />-->
+                <!--<entry key="com.stuff.MyAppCheckedException" value="app-checked-error" />-->
+            </map>
+        </property>
+        <!--<property name="defaultErrorView" value="generalError"/>-->
+    </bean>
 </beans>
