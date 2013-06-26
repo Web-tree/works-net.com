@@ -28,5 +28,10 @@
         <function-class>com.worksnet.utils.jsp.tags.ViewHelper</function-class>
         <function-signature>java.lang.String getBaseUrl()</function-signature>
     </function>
+    <function>
+        <name>getConfParam</name>
+        <function-class>com.worksnet.utils.jsp.tags.ViewHelper</function-class>
+        <function-signature>java.lang.String getConfParam(java.lang.String)()</function-signature>
+    </function>
 
 </taglib>
