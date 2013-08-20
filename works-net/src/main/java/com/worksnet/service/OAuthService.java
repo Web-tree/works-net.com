@@ -8,8 +8,10 @@ import com.worksnet.system.Conf;
 import com.worksnet.system.Log;
 import com.worksnet.utils.HttpUtils;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import java.util.Map;
  *         Time: 20:34
  */
 @Service
+@Transactional
 public class OAuthService {
 
     @Autowired
@@ -45,12 +48,13 @@ public class OAuthService {
         return oAuth.getOAuthId() + "@" + oAuth.getProvider();
     }
 
+    @Transactional
     public User userByGitHubAuth(GitHubAuth gitHubAuth) {
         return dao.getUserByGitHubAuth(gitHubAuth);
     }
 
-    public void addGitHubAuthWithNewUser(GitHubAuth gitHubAuth) {
-        dao.addGitHubAuthWithNewUser(gitHubAuth);
+    public User addGitHubAuthWithNewUser(GitHubAuth gitHubAuth) {
+        return dao.addGitHubAuthWithNewUser(gitHubAuth);
     }
 
     public int addGitHubAuth(GitHubAuth gitHubAuth) {
@@ -71,21 +75,23 @@ public class OAuthService {
         params.put("client_secret", Conf.get("github.clientSecret"));
         params.put("code", code);
 
+        Logger log = Log.getLogger(OAuthService.class);
+
         try {
             String url = GitHubUrls.ACCESS_TOKEN.getUrl();
             Map<String, String> result = HttpUtils.parseHttpParams(HttpUtils.sendPostRequest(url, params));
             if (result.containsKey("error")) {
-                Log.log("Git hub auth error: " + result.get("error"));
+                log.error("Git hub auth error: {}", result.get("error"));
                 throw new OAuthError();
             } else if (result.containsKey("access_token")) {
                 params.clear();
                 params.put("access_token", result.get("access_token"));
                 String gitHubUser = HttpUtils.sendGetRequest(GitHubUrls.USER_INFO.getUrl(), params);
-                System.out.print(gitHubUser);
+                log.debug("Github user: {}", gitHubUser);
                 return new ObjectMapper().readValue(gitHubUser, GitHubAuth.class);
             }
         } catch (IOException e) {
-            Log.log("GitHub get request error.", e);
+            log.error("GitHub get request error.", e);
             throw new OAuthError();
         }
         throw new OAuthError();

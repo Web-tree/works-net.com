@@ -28,7 +28,7 @@ public class OAuthDAO extends BaseDAO<BaseOAuth> {
                 .uniqueResult();
     }
 
-    public void addGitHubAuthWithNewUser(GitHubAuth gitHubAuth) {
+    public User addGitHubAuthWithNewUser(GitHubAuth gitHubAuth) {
         User user = UserService.createNewUser(OAuthService.generateLogin(gitHubAuth));
         user.setEnabled(true);
         Transaction transaction = db.beginTransaction();
@@ -37,6 +37,7 @@ public class OAuthDAO extends BaseDAO<BaseOAuth> {
             gitHubAuth.setUser(user);
             gitHubAuth.setId(addGitHubAuth(gitHubAuth));
             transaction.commit();
+            return user;
         } catch (Throwable e) {
             transaction.rollback();
             throw e;

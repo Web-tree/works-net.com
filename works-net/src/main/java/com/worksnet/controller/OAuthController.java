@@ -4,13 +4,10 @@ import com.worksnet.model.User;
 import com.worksnet.model.oauth.GitHubAuth;
 import com.worksnet.service.OAuthService;
 import com.worksnet.service.UserService;
-import com.worksnet.system.Conf;
+import com.worksnet.system.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,8 +30,7 @@ public class OAuthController extends BaseController {
     private UserService userService;
 
     @RequestMapping(value = "/oauth/github", method = RequestMethod.GET)
-    public String githubAuthPage(Model model, @RequestParam(value = "code", required = false) String code, HttpServletRequest request) {
-        Authentication qwe = SecurityContextHolder.getContext().getAuthentication();
+    public String githubAuthPage(@RequestParam(value = "code", required = false) String code, HttpServletRequest request) {
         if (code != null) {
             try {
                 GitHubAuth gitHubAuth = service.getGitHubLoginByCode(code);
@@ -46,19 +42,16 @@ public class OAuthController extends BaseController {
                         gitHubAuth.setUser(UserService.getCurrentUser());
                         service.addGitHubAuth(gitHubAuth);
                     } else {
-                        service.addGitHubAuthWithNewUser(gitHubAuth);
+                        user = service.addGitHubAuthWithNewUser(gitHubAuth);
                         userService.loginByUser(user, request);
                     }
                 }
                 return "redirect:/";
             } catch (OAuthService.OAuthError oAuthError) {
-                oAuthError.printStackTrace();
-//                result.rejectValue("OAuthError", "OAuth.cantAuth");
+                Log.getLogger(OAuthController.class).error("OAuth error.", oAuthError);
             }
         }
-        qwe = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("clientId", Conf.get("github.clientId"));
-        return "auth/oauth/github/auth";
+        return "redirect:/";
     }
 
 
