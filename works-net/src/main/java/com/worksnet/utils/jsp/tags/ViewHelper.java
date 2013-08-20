@@ -24,4 +24,8 @@ public class ViewHelper {
     public static String getBaseUrl() {
         return Conf.get("url.base");
     }
+
+    public static String getConfParam(String param) {
+        return Conf.get(param);
+    }
 }
