@@ -61,7 +61,7 @@ public class Conf {
         try {
             return new FileInputStream(getConfPath() + "main.properties");
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            Log.getLogger(Conf.class).error("Can't open config file.", e);
             throw new ConfFileNotFound();
         }
     }

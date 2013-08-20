@@ -1,7 +1,6 @@
 package com.worksnet.utils.filter;
 
-import com.worksnet.utils.DB;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.worksnet.system.Log;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -9,8 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.RequestWrapper;
 import java.io.IOException;
 
 /**
@@ -32,10 +29,11 @@ public class ErrorFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        try{
+        try {
             chain.doFilter(request, response);
         } catch (Throwable t) {
-            t.printStackTrace();
+            Log.getLogger(ErrorFilter.class).error("Not catcher error.", t);
+            request.getRequestDispatcher("/WEB-INF/views/error/generalError.jsp").forward(request, response);
         }
     }
 
