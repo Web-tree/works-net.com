@@ -6,11 +6,13 @@ import com.worksnet.service.UserService;
 import com.worksnet.utils.MailMessageBuilder;
 import com.worksnet.validator.RegistrationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -25,8 +27,8 @@ public class AuthController extends BaseController {
     @Autowired
     private RegistrationValidator validator;
 
-    //    @Autowired
-//    @Qualifier("userService")
+    @Autowired
+    @Qualifier("userService")
     private UserService service;
 
     @Autowired
@@ -54,7 +56,7 @@ public class AuthController extends BaseController {
             return "/auth/register";
         }
 
-//        mailService.sendEmailConfirmation(user, RequestContextUtils.getLocale(request));
+        mailService.sendEmailConfirmation(user, RequestContextUtils.getLocale(request));
 
         service.add(user);
 
@@ -63,6 +65,6 @@ public class AuthController extends BaseController {
 
     @RequestMapping(value = "/confirm/info", method = RequestMethod.GET)
     public String confirmInfo() {
-        return "/auth/registerConfirmInfo";
+        return "/auth/registerConfir1mInfo";
     }
 }
