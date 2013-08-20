@@ -3,10 +3,11 @@ package com.worksnet.service;
 import com.worksnet.dao.WorkDAO;
 import com.worksnet.dao.WorkDetailDAO;
 import com.worksnet.model.Work;
+import com.worksnet.model.oauth.GitHubAuth;
+import com.worksnet.model.workdetails.GitHubDetails;
 import com.worksnet.model.workdetails.WorkDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,7 +30,6 @@ public class WorkService extends BaseService<Work> {
         return (WorkDAO) dao;
     }
 
-    @Transactional
     public List<Work> getListByOwner(int ownerId) {
         return getDao().getListByOwnerId(ownerId);
     }
@@ -40,6 +40,15 @@ public class WorkService extends BaseService<Work> {
 
     public List<WorkDetail> getDetails(int workId) {
         return detailsDAO.getDetailsByWorkId(workId);
+    }
+
+    public void checkDetails(GitHubDetails gitHubDetails) {
+        for (GitHubAuth gitHubAuth : UserService.getCurrentUser().getGitHubAuths()) {
+            if (gitHubAuth.getLogin().equals(gitHubDetails.getLogin())) {
+                gitHubDetails.setChecked(true);
+                detailsDAO.save(gitHubDetails);
+            }
+        }
     }
 
     public static class WrongDetailType extends Error {
