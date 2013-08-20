@@ -22,12 +22,12 @@ import java.util.List;
 public class DB {
     @Autowired
     private SessionFactory sessionFactory;
+
     private Session session;
 
     @PostConstruct
-    private void initSession() {
-        session = getSessionFactory().openSession();
-//        session.setFlushMode(FlushMode.MANUAL);
+    public void init() {
+        session = sessionFactory.openSession();
     }
 
     private SessionFactory getSessionFactory() {
@@ -45,27 +45,23 @@ public class DB {
 
     public int save(Object object) {
         Serializable saved = getSession().save(object);
-        getSession().flush();
         getSession().clear();
         return (int) saved;
     }
 
     public void update(Object object) {
         getSession().update(object);
-        getSession().flush();
         getSession().clear();
     }
 
     public int saveOrUpdate(Object object) {
         Object merged = getSession().merge(object);
-        getSession().flush();
         getSession().clear();
         return ((Model) merged).getId();
     }
 
     public void delete(Object object) {
         getSession().delete(object);
-        getSession().flush();
         getSession().clear();
     }
 
