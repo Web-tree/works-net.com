@@ -10,7 +10,7 @@ import javax.persistence.Entity;
  */
 @Entity
 public class GitHubDetails extends WorkDetail {
-    @Column(name = "login", nullable = false)
+    @Column(name = "login", nullable = false, unique = true)
     protected String login;
 
     @Column(name = "checked", nullable = false)
