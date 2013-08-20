@@ -22,14 +22,13 @@
         <a href="/work/${work.id}/edit"><tags:message code="work.edit"/></a>
     </c:if>
 
-    <div class="workdetails>
+    <div class="workdetails">
     <c:forEach items="${work.details}" var="detail">
         <p>
         <c:choose>
             <c:when test="${detail.type == 'LinkDetails'}">
                 <%--@elvariable id="detail" type="com.worksnet.model.workdetails.LinkDetails"--%>
-                <tags:message
-                        code="work.workDetails.link.url"/>: <a href="http://${detail.link}">http://${detail.link}</a>
+                <tags:message code="work.workDetails.link.url"/>: <a href="http://${detail.link}">http://${detail.link}</a>
             </c:when>
             <c:when test="${detail.type == 'GitHubDetails'}">
                 <%--@elvariable id="detail" type="com.worksnet.model.workdetails.GitHubDetails"--%>
@@ -38,6 +37,7 @@
         </c:choose>
         </p>
     </c:forEach>
+
     </div>
 
     <c:if test="${isOwner}">
