@@ -1,14 +1,24 @@
 package com.worksnet.model;
 
+import com.worksnet.model.oauth.GitHubAuth;
 import org.hibernate.validator.Email;
 import org.hibernate.validator.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author maxim.levicky
@@ -47,6 +57,10 @@ public class User extends BaseModel implements UserDetails {
 
     @Column(name = "auth_role")
     protected int authRole = 1;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = true)
+    protected List<GitHubAuth> gitHubAuths;
 
     public int getId() {
         return id;
@@ -134,5 +148,13 @@ public class User extends BaseModel implements UserDetails {
 
     public void setAuthRole(int authRole) {
         this.authRole = authRole;
+    }
+
+    public List<GitHubAuth> getGitHubAuths() {
+        return gitHubAuths;
+    }
+
+    public void setGitHubAuths(List<GitHubAuth> gitHubAuths) {
+        this.gitHubAuths = gitHubAuths;
     }
 }
