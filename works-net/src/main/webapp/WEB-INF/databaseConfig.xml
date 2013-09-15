@@ -16,8 +16,8 @@
     <!--
      Настройки бина dataSource будем хранить в отдельном файле
     -->
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="file:${user.home}/worksnetConf/jdbc.properties"/>
+    <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"-->
+    <!--p:location="file:${user.home}/worksnetConf/jdbc.properties"/>-->
     <!--p:location="/WEB-INF/jdbc.properties"/>-->
     <!--  Непосредственно бин dataSource  -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
